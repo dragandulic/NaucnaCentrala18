@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class NaturalScience {
+public class ScientificArea {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class NaturalScience {
 	private String code;
 	
 	
-	public NaturalScience() {
+	public ScientificArea() {
 		
 	}
 	

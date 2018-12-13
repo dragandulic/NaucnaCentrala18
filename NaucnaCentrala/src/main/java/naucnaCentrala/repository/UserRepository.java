@@ -1,12 +1,12 @@
 package naucnaCentrala.repository;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import naucnaCentrala.model.ScientificArea;
+import naucnaCentrala.model.User;
 
 @Repository
-public interface NaturalScienceRepository extends JpaRepository<ScientificArea, Long>{
+public interface UserRepository extends JpaRepository<User, Long>{
 
+	User findByEmail(String email);
 }
