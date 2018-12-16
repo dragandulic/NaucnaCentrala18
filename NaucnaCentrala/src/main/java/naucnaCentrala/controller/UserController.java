@@ -1,8 +1,10 @@
 package naucnaCentrala.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import naucnaCentrala.model.User;
 import naucnaCentrala.service.UserService;
 
+@CrossOrigin(origins = "http://localhost:8081/#/")
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -24,22 +27,26 @@ public class UserController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@PostMapping("/sign-up")
-	public void singUp(@RequestBody User user ) {
+	public String singUp(@RequestBody User user ) {
 		
 		String rez = userService.singup(user);
-		if(rez==null) {
-			System.out.println(rez);
-		}
-		else {
-			System.out.println(rez);
-		}
+		return rez;
+		
 	}
 	
-	
+	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/loginn")
 	public void login(@RequestBody User user) {
 		
 		System.out.println("DOSAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+		
+	}
+	
+	@PreAuthorize("hasRole('USER')")
+	@PostMapping("/saska")
+	public void saska(@RequestBody User user) {
+		
+		System.out.println("SASKA JE PAMETNA DEVOJCIA!!!!");
 		
 	}
 	

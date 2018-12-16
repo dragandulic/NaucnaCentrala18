@@ -18,3 +18,6 @@ INSERT INTO `naucnacentrala`.`magazine_reviewers` (`magazine_id`, `reviewers_id`
 
 
 INSERT INTO `naucnacentrala`.`magazine_othereditors` (`magazine_id`, `othereditors_id`) VALUES ('1','3');
+
+INSERT INTO `naucnacentrala`.`role` (`id`, `description`, `name`) VALUES ('1','Korisnik sistem', 'USER');
+INSERT INTO `naucnacentrala`.`role` (`id`, `description`, `name`) VALUES ('2','Autor sistema', 'AUTHOR');

@@ -1,9 +1,17 @@
 package naucnaCentrala.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
 public class User {
@@ -25,6 +33,12 @@ public class User {
 	private String email;
 	
 	private String password;
+	
+	private String confirmpassword;
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	private Set<Role> roles = new HashSet<>();
 	
 	public User() {
 		
@@ -87,6 +101,26 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public String getConfirmpassword() {
+		return confirmpassword;
+	}
+
+
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
+	}
+
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 	
 	
