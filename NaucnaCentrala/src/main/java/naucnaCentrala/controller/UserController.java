@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import naucnaCentrala.model.User;
 import naucnaCentrala.service.UserService;
 
-@CrossOrigin(origins = "http://localhost:8081/#/")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -38,7 +38,7 @@ public class UserController {
 	@PostMapping("/loginn")
 	public void login(@RequestBody User user) {
 		
-		System.out.println("DOSAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+		System.out.println("DOSAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO " + user.getEmail());
 		
 	}
 	
@@ -46,7 +46,7 @@ public class UserController {
 	@PostMapping("/saska")
 	public void saska(@RequestBody User user) {
 		
-		System.out.println("SASKA JE PAMETNA DEVOJCIA!!!!");
+		
 		
 	}
 	

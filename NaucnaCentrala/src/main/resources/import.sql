@@ -20,4 +20,12 @@ INSERT INTO `naucnacentrala`.`magazine_reviewers` (`magazine_id`, `reviewers_id`
 INSERT INTO `naucnacentrala`.`magazine_othereditors` (`magazine_id`, `othereditors_id`) VALUES ('1','3');
 
 INSERT INTO `naucnacentrala`.`role` (`id`, `description`, `name`) VALUES ('1','Korisnik sistem', 'USER');
-INSERT INTO `naucnacentrala`.`role` (`id`, `description`, `name`) VALUES ('2','Autor sistema', 'AUTHOR');
+INSERT INTO `naucnacentrala`.`role` (`id`, `description`, `name`) VALUES ('2','Objavljuje radove u magazin', 'AUTHOR');
+
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`) VALUES ('1','Osnove ratarstva i povrtarstva', 'finalversion', 'ratarstvo', 'pdf', 'Zbirka radova instituta za ratarstvo i povrtarstvo', '1');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`) VALUES ('2','Matematicka analiza', 'finalversion', 'analiza', 'pdf', 'Matematicki vesnik', '3');
+
+
+
+
+

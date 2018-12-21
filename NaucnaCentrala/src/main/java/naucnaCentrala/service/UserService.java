@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService{
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public String singup(User user) {
-		System.out.println("ROLAAA: " + user.getRoles());
+		
 		if(user.getPassword().equals(user.getConfirmpassword())) {
 			User use = userRepository.findByEmail(user.getEmail());
 			

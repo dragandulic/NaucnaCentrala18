@@ -36,6 +36,9 @@ public class User {
 	
 	private String confirmpassword;
 	
+	@OneToOne
+	private MembershipFee membershipfee;
+	
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<Role> roles = new HashSet<>();
@@ -121,6 +124,16 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+
+	public MembershipFee getMembershipfee() {
+		return membershipfee;
+	}
+
+
+	public void setMembershipfee(MembershipFee membershipfee) {
+		this.membershipfee = membershipfee;
 	}
 	
 	
