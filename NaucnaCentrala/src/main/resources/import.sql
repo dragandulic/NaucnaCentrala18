@@ -26,6 +26,13 @@ INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms
 INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`) VALUES ('2','Matematicka analiza', 'finalversion', 'analiza', 'pdf', 'Matematicki vesnik', '3');
 
 
+INSERT INTO `naucnacentrala`.`user` (`id`, `city`, `confirmpassword`, `country`, `email`, `name`, `password`, `surname`, `membershipfee_id`) VALUES ('1','Berlin', '555', 'Germany', 'maki@gmail.com', 'Maja', '$2a$10$ekSZsklk65QTyPbeM44fK.E9M1E1KbjCp7R/sPRN/iBeeg1av1liW', 'Majic', '1');
+
+INSERT INTO `naucnacentrala`.`user_roles` (`user_id`, `roles_id`) VALUES ('1','2');
+
+
+INSERT INTO `naucnacentrala`.`membership_fee` (`id`, `startdate`,`enddate`) VALUES ('1','2018-12-15 00:00:00','2019-01-15 00:00:00');
+
 
 
 

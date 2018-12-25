@@ -8,6 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class MembershipFee {
 	
@@ -15,13 +22,15 @@ public class MembershipFee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Temporal(value = TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
 	private Date startdate;
 	
+	@Temporal(value = TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
 	private Date enddate;
 	
-	@OneToOne
-	private Magazine magazine;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -46,13 +55,7 @@ public class MembershipFee {
 		this.enddate = enddate;
 	}
 
-	public Magazine getMagazine() {
-		return magazine;
-	}
-
-	public void setMagazine(Magazine magazine) {
-		this.magazine = magazine;
-	}
+	
 	
 	
 }

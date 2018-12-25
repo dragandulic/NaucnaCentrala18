@@ -34,7 +34,7 @@ public class UserController {
 		
 	}
 	
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR')")
 	@PostMapping("/loginn")
 	public void login(@RequestBody User user) {
 		

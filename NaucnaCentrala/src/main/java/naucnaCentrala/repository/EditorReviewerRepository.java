@@ -8,4 +8,7 @@ import naucnaCentrala.model.EditorReviewer;
 @Repository
 public interface EditorReviewerRepository extends JpaRepository<EditorReviewer, Long> {
 
+	
+
+	
 }

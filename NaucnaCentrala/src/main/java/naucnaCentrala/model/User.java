@@ -1,6 +1,8 @@
 package naucnaCentrala.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -117,8 +119,12 @@ public class User {
 	}
 
 
-	public Set<Role> getRoles() {
-		return roles;
+	public List<Role> getRoles() {
+		List<Role> retlist = new ArrayList<>(roles);
+		if(retlist.size() > 0) {
+			return retlist;
+		}
+		return null;
 	}
 
 
