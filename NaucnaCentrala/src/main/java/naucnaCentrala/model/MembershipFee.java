@@ -30,6 +30,12 @@ public class MembershipFee {
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
 	private Date enddate;
 	
+	private String amount;
+	
+	
+	public MembershipFee() {
+		
+	}
 	
 	public Long getId() {
 		return id;
@@ -53,6 +59,14 @@ public class MembershipFee {
 
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
+	}
+
+	public String getAmount() {
+		return amount;
+	}
+
+	public void setAmount(String amount) {
+		this.amount = amount;
 	}
 
 	

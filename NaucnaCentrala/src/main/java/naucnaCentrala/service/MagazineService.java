@@ -72,16 +72,17 @@ public class MagazineService {
 			if(loginuser != null) {
 				if(loginuser.getMembershipfee() != null){
 					if(datum.after(loginuser.getMembershipfee().getStartdate()) && datum.before(loginuser.getMembershipfee().getEnddate())) {
-						return "membershipfeetreu"; //ima aktivnu clanarinu
+						return "membershipfeetrue"; //ima aktivnu clanarinu
 					}
 					else{
 						return "membershipfeefalse"; //nema aktivnu clanarinu					
 					}					
 				}   				
 			}
+			return "membershipfeeinvalid";
 		}
 		
-		return "notopenaccess";
+		return "noopenaccess";
 	}
 	
 	

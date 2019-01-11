@@ -9,6 +9,7 @@ INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('3'
 
 
 INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`,`methodpayment`,`maineditor_id`) VALUES ('1','Matematicki vesnik','0332-4907',1,'3');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`,`methodpayment`,`maineditor_id`) VALUES ('2','Saskin magazin','5561-3971',1,'1');
 
 
 INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('1','1');
@@ -31,7 +32,7 @@ INSERT INTO `naucnacentrala`.`user` (`id`, `city`, `confirmpassword`, `country`,
 INSERT INTO `naucnacentrala`.`user_roles` (`user_id`, `roles_id`) VALUES ('1','2');
 
 
-INSERT INTO `naucnacentrala`.`membership_fee` (`id`, `startdate`,`enddate`) VALUES ('1','2018-12-15 00:00:00','2019-01-15 00:00:00');
+INSERT INTO `naucnacentrala`.`membership_fee` (`id`, `startdate`,`enddate`,`amount`) VALUES ('1','2018-12-15 00:00:00','2019-01-01 00:00:00','1');
 
 
 
