@@ -46,6 +46,13 @@ public class Magazine {
 	@ManyToMany
 	private Set<EditorReviewer> reviewers = new HashSet<>();
 	
+	private String merchant_id;
+	
+	private String merchant_password;
+	
+	private double amountMag;
+	
+	
 	
 	
 	public Magazine() {
@@ -136,6 +143,36 @@ public class Magazine {
 
 	public void setMethodpayment(boolean methodpayment) {
 		this.methodpayment = methodpayment;
+	}
+
+
+	public String getMerchant_id() {
+		return merchant_id;
+	}
+
+
+	public void setMerchant_id(String merchant_id) {
+		this.merchant_id = merchant_id;
+	}
+
+
+	public String getMerchant_password() {
+		return merchant_password;
+	}
+
+
+	public void setMerchant_password(String merchant_password) {
+		this.merchant_password = merchant_password;
+	}
+
+
+	public double getAmountMag() {
+		return amountMag;
+	}
+
+
+	public void setAmountMag(double amountMag) {
+		this.amountMag = amountMag;
 	}
 	
 	

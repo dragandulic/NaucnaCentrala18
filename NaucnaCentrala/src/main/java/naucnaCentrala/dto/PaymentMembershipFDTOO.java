@@ -8,12 +8,17 @@ public class PaymentMembershipFDTOO {
 	private String nameCustomer;
 	private String surnameCustomer;
 	private String emailCustomer;
+	private String title;
 	
 	private Long idSeller;
 	private String nameSeller;
 	private String issnumberSeller;
 
 	private double amount;
+	
+	private String merchant_id;
+	private String merchant_password;
+	
 	
 	public PaymentMembershipFDTOO() {
 		
@@ -107,6 +112,36 @@ public class PaymentMembershipFDTOO {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+
+
+	public String getMerchant_id() {
+		return merchant_id;
+	}
+
+
+	public void setMerchant_id(String merchant_id) {
+		this.merchant_id = merchant_id;
+	}
+
+
+	public String getMerchant_password() {
+		return merchant_password;
+	}
+
+
+	public void setMerchant_password(String merchant_password) {
+		this.merchant_password = merchant_password;
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 }

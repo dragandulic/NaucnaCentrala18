@@ -72,6 +72,9 @@ public class PaymentObjService {
 			obj.setNameSeller(po.getSeller().getName());
 			obj.setIssnumberSeller(po.getSeller().getIssnnumber());
 			obj.setAmount(po.getAmount());
+			obj.setMerchant_id(po.getSeller().getMerchant_id());
+			obj.setMerchant_password(po.getSeller().getMerchant_password());
+			obj.setTitle(po.getTitle());
 			return obj;
 		}
 		else {
