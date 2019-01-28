@@ -27,21 +27,27 @@ public class PaymentObjectService {
 		
 		Magazine magazine = magazineRepository.findByIdEquals(idm);
 		
-		PaymentObject po = new PaymentObject();
-		po.setAmount(1); //cenu treba promeni, ovo je samo za probu
-		po.setTitle("Placanja clanarine");
-		po.setDescription("Korisnik placa clanarinu u iznosu 1$");
+		if(magazine != null) {
+			PaymentObject po = new PaymentObject();
+			po.setAmount(1); //cenu treba promeniti, ovo je samo za probu
+			po.setTitle("Placanja clanarine");//naslov takodje treba promentiti
+			po.setDescription("Korisnik placa clanarinu u iznosu 1$");//opis treba promeniti
+			po.setMerchantid(magazine.getMerchant_id());
+			po.setMerchantpassword(magazine.getMerchant_password());
+			
+			HttpHeaders header = new HttpHeaders();	
+			HttpEntity entity = new HttpEntity(po, header);
+			
+			Long response = restTemplate.postForObject("http://localhost:8051/objectpayment/savepaymentobject", entity, Long.class);
+			
+			
+			System.out.println("REZULTAT: " + response);
+			
+			
+			return response;
+		}
 		
-		HttpHeaders header = new HttpHeaders();	
-		HttpEntity entity = new HttpEntity(po, header);
-		
-		Long response = restTemplate.postForObject("http://localhost:8051/objectpayment/savepaymentobject", entity, Long.class);
-		
-		
-		System.out.println("REZULTAT: " + response);
-		
-		
-		return response;
+		return null;
 	}
 	
 	
