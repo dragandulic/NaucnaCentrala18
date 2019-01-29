@@ -21,9 +21,9 @@ public class PaymentObjectController {
 	
 	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR')")
 	@GetMapping("/createpaymentobject/{idm}")
-	public Long createPaymentObj(@PathVariable Long idm) {
+	public String createPaymentObj(@PathVariable Long idm) {
 		
-		Long res = paymentObjectService.createpaymentobject(idm); 
+		String res = paymentObjectService.createpaymentobject(idm); 
 		
 		
 		if(res !=null) {

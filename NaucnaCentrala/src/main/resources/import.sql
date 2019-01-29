@@ -8,8 +8,8 @@ INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('2'
 INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('3','Prirodne nauke','pri3');
 
 
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amount_mag`) VALUES ('1','Matematicki vesnik','0332-4907',1,'3','h18dk4mdjw3bz82hd71abgm39dm48f','1','21');
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amount_mag`) VALUES ('2','Saskin magazin','5561-3971',1,'1','o30sldmcv81yt6j5nf9q2nv0m4u7v9','2','31');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amount_mag`) VALUES ('1','Matematicki vesnik','0332-4907',1,'3','977dk4mdjw3bz82hd71abgm39dm48f','1','21');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amount_mag`) VALUES ('2','Saskin magazin','5561-3971',1,'1','411sldmcv81yt6j5nf9q2nv0m4u7v9','2','31');
 
 
 INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('1','1');

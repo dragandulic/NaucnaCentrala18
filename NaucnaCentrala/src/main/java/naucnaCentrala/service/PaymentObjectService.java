@@ -23,8 +23,8 @@ public class PaymentObjectService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	public Long createpaymentobject(Long idm) {
-		
+	public String createpaymentobject(Long idm) {
+		System.out.println("METODAAAAAAAAAAAA");
 		Magazine magazine = magazineRepository.findByIdEquals(idm);
 		
 		if(magazine != null) {
@@ -37,9 +37,9 @@ public class PaymentObjectService {
 			
 			HttpHeaders header = new HttpHeaders();	
 			HttpEntity entity = new HttpEntity(po, header);
-			
-			Long response = restTemplate.postForObject("http://localhost:8051/objectpayment/savepaymentobject", entity, Long.class);
-			
+			System.out.println("PREEEEEEEEEEE");
+			String response = restTemplate.postForObject("http://localhost:8051/objectpayment/savepaymentobject", entity, String.class);
+			System.out.println("POSLEEEEEEEEEEE");
 			
 			System.out.println("REZULTAT: " + response);
 			
