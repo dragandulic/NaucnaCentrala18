@@ -3,6 +3,8 @@ package naucnaCentrala.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,14 +36,22 @@ public class PaymentObjectService {
 			po.setDescription("Korisnik placa clanarinu u iznosu 1$");//opis treba promeniti
 			po.setMerchantid(magazine.getMerchant_id());
 			po.setMerchantpassword(magazine.getMerchant_password());
+			po.setMagazinename(magazine.getName());
+			po.setSuccessUrl("http://localhost:8083/paymentobject/savetransaction");
+			
+			String useremail = "";
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (principal instanceof UserDetails) {
+				useremail = ((UserDetails)principal).getUsername();
+			} else {
+				useremail = principal.toString();
+			}
+			po.setPayermail(useremail);
 			
 			HttpHeaders header = new HttpHeaders();	
 			HttpEntity entity = new HttpEntity(po, header);
-			System.out.println("PREEEEEEEEEEE");
-			String response = restTemplate.postForObject("http://localhost:8051/objectpayment/savepaymentobject", entity, String.class);
-			System.out.println("POSLEEEEEEEEEEE");
 			
-			System.out.println("REZULTAT: " + response);
+			String response = restTemplate.postForObject("http://localhost:8051/objectpayment/savepaymentobject", entity, String.class);
 			
 			
 			return response;

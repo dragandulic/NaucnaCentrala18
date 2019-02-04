@@ -36,7 +36,6 @@ public class MembershipfeeService {
 		
 		String response = restTemplate.postForObject("http://localhost:8051/kpcontroller/payment", entity, String.class);  
 		
-		System.out.println("TTTTTTTTTTTTTTTTTTTTT " + response);
 		
 		return response;
 		
