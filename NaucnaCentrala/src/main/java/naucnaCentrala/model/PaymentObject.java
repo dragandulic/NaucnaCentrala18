@@ -29,6 +29,8 @@ public class PaymentObject {
 	
 	private String successUrl;
 	
+	private String merchantmail;
+	
 	public PaymentObject() {
 		
 	}
@@ -139,6 +141,18 @@ public class PaymentObject {
 
 	public void setSuccessUrl(String successUrl) {
 		this.successUrl = successUrl;
+	}
+
+
+
+	public String getMerchantmail() {
+		return merchantmail;
+	}
+
+
+
+	public void setMerchantmail(String merchantmail) {
+		this.merchantmail = merchantmail;
 	}
 	
 	
