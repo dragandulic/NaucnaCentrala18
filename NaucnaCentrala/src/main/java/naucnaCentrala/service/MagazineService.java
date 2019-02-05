@@ -42,6 +42,7 @@ public class MagazineService {
 				magazinedto.setIssnnumber(magazines.get(i).getIssnnumber());
 				magazinedto.setName(magazines.get(i).getName());
 				magazinedto.setChifeditor(magazines.get(i).getMaineditor().getName() + " " + magazines.get(i).getMaineditor().getSurname());
+				magazinedto.setAmountmag(magazines.get(i).getAmountMag());
 				retlist.add(magazinedto);
 				
 			}

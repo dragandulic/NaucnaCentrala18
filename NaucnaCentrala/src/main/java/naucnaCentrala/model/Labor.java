@@ -25,8 +25,11 @@ public class Labor {
 	private String pdf;
 	
 	private String finalversion;
-
 	
+	@ManyToOne
+	private Magazine magazine;
+
+	private double pricelabor;
 	
 	public Labor() {
 		
@@ -87,6 +90,26 @@ public class Labor {
 
 	public void setFinalversion(String finalversion) {
 		this.finalversion = finalversion;
+	}
+
+
+	public Magazine getMagazine() {
+		return magazine;
+	}
+
+
+	public void setMagazine(Magazine magazine) {
+		this.magazine = magazine;
+	}
+
+
+	public double getPricelabor() {
+		return pricelabor;
+	}
+
+
+	public void setPricelabor(double pricelabor) {
+		this.pricelabor = pricelabor;
 	}
 	
 }

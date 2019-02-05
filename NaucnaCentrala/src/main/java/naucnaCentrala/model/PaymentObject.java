@@ -31,6 +31,8 @@ public class PaymentObject {
 	
 	private String merchantmail;
 	
+	private String fronturl;
+	
 	public PaymentObject() {
 		
 	}
@@ -153,6 +155,18 @@ public class PaymentObject {
 
 	public void setMerchantmail(String merchantmail) {
 		this.merchantmail = merchantmail;
+	}
+
+
+
+	public String getFronturl() {
+		return fronturl;
+	}
+
+
+
+	public void setFronturl(String fronturl) {
+		this.fronturl = fronturl;
 	}
 	
 	

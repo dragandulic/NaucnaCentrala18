@@ -50,7 +50,7 @@ public class Magazine {
 	
 	private String merchant_password;
 	
-	private double amountMag;
+	private double amountmag;
 	
 	
 	
@@ -167,12 +167,12 @@ public class Magazine {
 
 
 	public double getAmountMag() {
-		return amountMag;
+		return amountmag;
 	}
 
 
 	public void setAmountMag(double amountMag) {
-		this.amountMag = amountMag;
+		this.amountmag = amountMag;
 	}
 	
 	

@@ -10,6 +10,8 @@ public class MagazineDTO {
 	private String issnnumber;
 	
 	private String chifeditor;
+	
+	private double amountmag;
 
 	public Long getId() {
 		return id;
@@ -41,6 +43,14 @@ public class MagazineDTO {
 
 	public void setChifeditor(String chifeditor) {
 		this.chifeditor = chifeditor;
+	}
+
+	public double getAmountmag() {
+		return amountmag;
+	}
+
+	public void setAmountmag(double amountmag) {
+		this.amountmag = amountmag;
 	}
 	
 }

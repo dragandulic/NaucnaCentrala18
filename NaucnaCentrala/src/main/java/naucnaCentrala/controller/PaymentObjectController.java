@@ -28,10 +28,10 @@ public class PaymentObjectController {
 	private PaymentObjectService paymentObjectService;
 	
 	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR')")
-	@GetMapping("/createpaymentobject/{idm}")
-	public String createPaymentObj(@PathVariable Long idm) {
+	@GetMapping("/createpaymentobject/{id}/{type}")
+	public String createPaymentObj(@PathVariable Long id, @PathVariable String type) {
 		
-		String res = paymentObjectService.createpaymentobject(idm); 
+		String res = paymentObjectService.createpaymentobject(id,type); 
 		
 		
 		if(res !=null) {
