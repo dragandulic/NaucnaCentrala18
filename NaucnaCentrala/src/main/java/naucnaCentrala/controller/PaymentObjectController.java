@@ -31,7 +31,7 @@ public class PaymentObjectController {
 	@GetMapping("/createpaymentobject/{id}/{type}")
 	public String createPaymentObj(@PathVariable Long id, @PathVariable String type) {
 		
-		String res = paymentObjectService.createpaymentobject(id,type); 
+		String res = paymentObjectService.createpaymentobject(id,type);
 		
 		
 		if(res !=null) {
