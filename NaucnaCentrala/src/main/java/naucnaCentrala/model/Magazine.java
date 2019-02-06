@@ -42,6 +42,8 @@ public class Magazine {
 	@OneToMany
 	private Set<EditorReviewer> othereditors = new HashSet<>(); //urednici pojedinih naucnih oblasti
 	
+	@OneToOne
+	private DBFile dbfile;
 	
 	@ManyToMany
 	private Set<EditorReviewer> reviewers = new HashSet<>();
@@ -173,6 +175,26 @@ public class Magazine {
 
 	public void setAmountMag(double amountMag) {
 		this.amountmag = amountMag;
+	}
+
+
+	public DBFile getDbfile() {
+		return dbfile;
+	}
+
+
+	public void setDbfile(DBFile dbfile) {
+		this.dbfile = dbfile;
+	}
+
+
+	public double getAmountmag() {
+		return amountmag;
+	}
+
+
+	public void setAmountmag(double amountmag) {
+		this.amountmag = amountmag;
 	}
 	
 	

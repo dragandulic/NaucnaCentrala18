@@ -8,19 +8,19 @@ INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('2'
 INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('3','Saobracaj','SAOB');
 
 
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('1','Tehnika','0040-2176',1,'3','977dk4mdjw3bz82hd71abgm39dm48f','1','2');
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('2','Bankarstvo','1451-4354',1,'1','411sldmcv81yt6j5nf9q2nv0m4u7v9','2','3');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('1','Tehnika','0040-2176','8',1,'3','977dk4mdjw3bz82hd71abgm39dm48f','1','2');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('2','Bankarstvo','1451-4354','9',1,'1','411sldmcv81yt6j5nf9q2nv0m4u7v9','2','3');
 
 
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('1','abstract', 'finalversion', 'kyeterms', 'pdf', 'Analiza magnetopobudnih sila u multifaznim mašinama u sklopu integrisanih punjača za električna vozila', '1','1','1');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('2','abstract', 'finalversion', 'kyeterms', 'pdf', 'Međulaboratorijska ispitivanja kod širokopojasnih merenja elektromagnetskih polja', '1','1','2');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('3','abstract', 'finalversion', 'kyeterms', 'pdf', 'Sistemi emitovanja i standardi satelitske televizijske transmisije u Evropi ', '1','1','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('1','abstract', 'finalversion', 'kyeterms', '1', 'Analiza magnetopobudnih sila u multifaznim mašinama u sklopu integrisanih punjača za električna vozila', '1','1','1');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('2','abstract', 'finalversion', 'kyeterms', '2', 'Međulaboratorijska ispitivanja kod širokopojasnih merenja elektromagnetskih polja', '1','1','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('3','abstract', 'finalversion', 'kyeterms', '3', 'Sistemi emitovanja i standardi satelitske televizijske transmisije u Evropi', '1','1','2');
 
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('4','abstract', 'finalversion', 'kyeterms', 'pdf', 'Uticaj niskotarifnog prevozioca na cene karata tradicionalnog prevozioca na interkontinentalnim letovima', '3','1','2');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('5','abstract', 'finalversion', 'kyeterms', 'pdf', 'Izmena putnika na međumesnim linijama ', '3','1','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('4','abstract', 'finalversion', 'kyeterms', '4', 'Uticaj niskotarifnog prevozioca na cene karata tradicionalnog prevozioca na interkontinentalnim letovima', '3','1','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('5','abstract', 'finalversion', 'kyeterms', '5', 'Izmena putnika na međumesnim linijama', '3','1','2');
 
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('6','abstract', 'finalversion', 'kyeterms', 'pdf', 'Savremena uloga i značaj profesionalnih kvalifikacija u sektoru bankarstva', '2','2','1');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `pdf`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('7','abstract', 'finalversion', 'kyeterms', 'pdf', 'Tradicionalni i novi poslovni modeli u bankarskoj industriji', '2','2','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('6','abstract', 'finalversion', 'kyeterms', '6', 'Savremena uloga i značaj profesionalnih kvalifikacija u sektoru bankarstva', '2','2','1');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('7','abstract', 'finalversion', 'kyeterms', '7', 'Tradicionalni i novi poslovni modeli u bankarskoj industriji', '2','2','2');
 
 
 

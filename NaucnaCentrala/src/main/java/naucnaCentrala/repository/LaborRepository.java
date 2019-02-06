@@ -15,4 +15,6 @@ public interface LaborRepository extends JpaRepository<Labor, Long> {
 	
 	Labor findByIdEquals(Long id);
 	
+	Labor findByTitleEquals(String s);
+	
 }

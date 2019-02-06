@@ -15,10 +15,12 @@ import naucnaCentrala.model.Labor;
 import naucnaCentrala.model.Magazine;
 import naucnaCentrala.model.PaymentObject;
 import naucnaCentrala.model.Transaction;
+import naucnaCentrala.model.User;
 import naucnaCentrala.repository.LaborRepository;
 import naucnaCentrala.repository.MagazineRepository;
 import naucnaCentrala.repository.PaymentObjectRepository;
 import naucnaCentrala.repository.TransactionRepository;
+import naucnaCentrala.repository.UserRepository;
 
 @Service
 public class PaymentObjectService {
@@ -37,6 +39,11 @@ public class PaymentObjectService {
 	
 	@Autowired
 	private LaborRepository laborRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	
 	
 	public String createpaymentobject(Long id,String typee) {
 		boolean valido = false;
@@ -120,7 +127,31 @@ public class PaymentObjectService {
 	public String savetransaction(Transaction t) {
 		
 		if(t!=null) {
-			Transaction trans = transactionRepository.save(t);
+			Transaction trans = transactionRepository.save(t);			
+			User user = userRepository.findByEmail(t.getPayermail());
+			
+			if(t.getTitle().contains("rada") && t.getDescription().contains("rada")) {
+				
+				String s1 = t.getTitle().split("'")[1];
+				
+				Labor l = laborRepository.findByTitleEquals(s1);
+				
+				user.getPurchasedlabors().add(l);
+				
+				userRepository.save(user);
+				
+			}
+			else if(t.getTitle().contains("magazina") && t.getDescription().contains("magazina")) {
+				
+				
+				
+				Magazine m = magazineRepository.findByMerchantIdEquals(t.getMerchantid());
+				
+				user.getPurchasedmagazins().add(m);
+				
+				userRepository.save(user);
+			}
+
 			return "uspeno";
 		}
 		

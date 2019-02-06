@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Labor {
@@ -22,7 +23,8 @@ public class Labor {
 	
 	private String keyterms;
 	
-	private String pdf;
+	@OneToOne
+	private DBFile dbfile;
 	
 	private String finalversion;
 	
@@ -76,14 +78,6 @@ public class Labor {
 		this.keyterms = keyterms;
 	}
 
-	public String getPdf() {
-		return pdf;
-	}
-
-	public void setPdf(String pdf) {
-		this.pdf = pdf;
-	}
-
 	public String getFinalversion() {
 		return finalversion;
 	}
@@ -110,6 +104,16 @@ public class Labor {
 
 	public void setPricelabor(double pricelabor) {
 		this.pricelabor = pricelabor;
+	}
+
+
+	public DBFile getDbfile() {
+		return dbfile;
+	}
+
+
+	public void setDbfile(DBFile dbfile) {
+		this.dbfile = dbfile;
 	}
 	
 }

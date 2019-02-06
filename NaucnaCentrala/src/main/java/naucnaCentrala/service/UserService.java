@@ -3,18 +3,24 @@ package naucnaCentrala.service;
 import org.dom4j.dom.DOMNodeHelper.EmptyNodeList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import naucnaCentrala.dto.PurchasedPropsDTO;
+import naucnaCentrala.model.Labor;
+import naucnaCentrala.model.Magazine;
 import naucnaCentrala.model.User;
 import naucnaCentrala.repository.UserRepository;
 
 import static java.util.Collections.emptyList;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -68,6 +74,47 @@ public class UserService implements UserDetailsService{
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
 		});
 		return authorities;
+	}
+	
+	
+	
+	public ArrayList<PurchasedPropsDTO> purchasedprops() {
+		
+		
+		String useremail = "";
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			useremail = ((UserDetails)principal).getUsername();
+		} else {
+			useremail = principal.toString();
+		}
+		
+		User u = userRepository.findByEmail(useremail);
+		
+		ArrayList<PurchasedPropsDTO> res = new ArrayList<>();
+		boolean pom = false;
+		for(Labor l : u.getPurchasedlabors()) {
+			PurchasedPropsDTO p = new PurchasedPropsDTO();
+			p.setType("Labor");
+			p.setName(l.getTitle());
+			p.setDownloadurl("http://localhost:8083/dbfile/downloadFile=" + l.getDbfile().getId());
+			res.add(p);
+			pom=true;
+		}
+		
+		for(Magazine m : u.getPurchasedmagazins()) {
+			PurchasedPropsDTO p = new PurchasedPropsDTO();
+			p.setType("Magazine");
+			p.setName(m.getName());
+			p.setDownloadurl("http://localhost:8083/dbfile/downloadFile=" + m.getDbfile().getId());
+			res.add(p);
+			pom=true;
+		}
+		
+		if(pom) {
+			return res;
+		}
+		return null;
 	}
 	
 }

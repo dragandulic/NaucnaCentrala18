@@ -38,6 +38,13 @@ public class User {
 	
 	private String confirmpassword;
 	
+	@ManyToMany
+	private List<Labor> purchasedlabors;
+	
+	@ManyToMany
+	private List<Magazine> purchasedmagazins;
+	
+	
 	@OneToOne
 	private MembershipFee membershipfee;
 	
@@ -140,6 +147,26 @@ public class User {
 
 	public void setMembershipfee(MembershipFee membershipfee) {
 		this.membershipfee = membershipfee;
+	}
+
+
+	public List<Labor> getPurchasedlabors() {
+		return purchasedlabors;
+	}
+
+
+	public void setPurchasedlabors(List<Labor> purchasedlabors) {
+		this.purchasedlabors = purchasedlabors;
+	}
+
+
+	public List<Magazine> getPurchasedmagazins() {
+		return purchasedmagazins;
+	}
+
+
+	public void setPurchasedmagazins(List<Magazine> purchasedmagazins) {
+		this.purchasedmagazins = purchasedmagazins;
 	}
 	
 	

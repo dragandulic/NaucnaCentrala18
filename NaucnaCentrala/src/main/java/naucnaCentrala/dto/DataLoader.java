@@ -40,16 +40,77 @@ public class DataLoader implements ApplicationRunner{
 		final String fp = System.getProperty("user.dir");
 		String fpp=new String(fp+"\\Magazines\\");
 		
-		File file = new File(fpp + "Tehnika.pdf");
 		
 		
+		File file = new File(fpp + "Analiza magnetopobudnih sila u multifaznim mašinama u sklopu integrisanih punjača za električna vozila.pdf");
 	    FileInputStream input = new FileInputStream(file);
 	    MultipartFile multipartFile = new MockMultipartFile("file",
 	            file.getName(), "application/pdf", IOUtils.toByteArray(input));
-	    
-	    
-	    DBFile db1 = dbFileService.storeFile(multipartFile);
+	     
+	    DBFile db = dbFileService.storeFile(multipartFile);
 		
+	    
+	    File file1 = new File(fpp + "Međulaboratorijska ispitivanja kod širokopojasnih merenja elektromagnetnih polja.pdf");
+	    FileInputStream input1 = new FileInputStream(file1);
+	    MultipartFile multipartFile1 = new MockMultipartFile("file",
+	            file1.getName(), "application/pdf", IOUtils.toByteArray(input1));
+	     
+	    DBFile db1 = dbFileService.storeFile(multipartFile1);
+	    
+	    
+	    File file2 = new File(fpp + "Sistemi emitovanja i standardi satelitske televizijske transmisije u Evropi.pdf");
+	    FileInputStream input2 = new FileInputStream(file2);
+	    MultipartFile multipartFile2 = new MockMultipartFile("file",
+	            file2.getName(), "application/pdf", IOUtils.toByteArray(input2));
+	     
+	    DBFile db2 = dbFileService.storeFile(multipartFile2);
+	    
+	    
+	    File file4 = new File(fpp + "Uticaj niskotarifnog prevozioca na cene karata tradicionalnog prevozioca na interkontinentalnim letovima.pdf");
+	    FileInputStream input4 = new FileInputStream(file4);
+	    MultipartFile multipartFile4 = new MockMultipartFile("file",
+	            file4.getName(), "application/pdf", IOUtils.toByteArray(input4));
+	     
+	    DBFile db4 = dbFileService.storeFile(multipartFile4);
+	    
+	    File file5 = new File(fpp + "Izmena putnika na međumesnim linijama.pdf");
+	    FileInputStream input5 = new FileInputStream(file5);
+	    MultipartFile multipartFile5 = new MockMultipartFile("file",
+	            file5.getName(), "application/pdf", IOUtils.toByteArray(input5));
+	     
+	    DBFile db5 = dbFileService.storeFile(multipartFile5);
+	    
+	    
+	    File file6 = new File(fpp + "Savremena uloga i značaj profesionalnih kvalifikacija u sektoru bankarstva.pdf");
+	    FileInputStream input6 = new FileInputStream(file6);
+	    MultipartFile multipartFile6 = new MockMultipartFile("file",
+	            file6.getName(), "application/pdf", IOUtils.toByteArray(input6));
+	     
+	    DBFile db6 = dbFileService.storeFile(multipartFile6);
+	    
+   
+	    File file7 = new File(fpp + "Tradicionalni i novi poslovni modeli u bankarskoj industriji.pdf");
+	    FileInputStream input7 = new FileInputStream(file7);
+	    MultipartFile multipartFile7 = new MockMultipartFile("file",
+	            file7.getName(), "application/pdf", IOUtils.toByteArray(input7));
+	     
+	    DBFile db7 = dbFileService.storeFile(multipartFile7);
+	    
+	    File file8 = new File(fpp + "Magazin Tehnika.pdf");
+	    FileInputStream input8 = new FileInputStream(file8);
+	    MultipartFile multipartFile8 = new MockMultipartFile("file",
+	            file8.getName(), "application/pdf", IOUtils.toByteArray(input8));
+	     
+	    DBFile db8 = dbFileService.storeFile(multipartFile8);
+	    
+	    
+	    File file9 = new File(fpp + "Magazin Bankarstvo.pdf");
+	    FileInputStream input9 = new FileInputStream(file9);
+	    MultipartFile multipartFile9 = new MockMultipartFile("file",
+	            file9.getName(), "application/pdf", IOUtils.toByteArray(input9));
+	     
+	    DBFile db9 = dbFileService.storeFile(multipartFile9);
+	    
 		/*
 		InputStream is = getClass().getResourceAsStream("C:\\Users\\dragan\\Documents\\GitHub\\NaucnaCentrala18\\NaucnaCentrala\\Magazines\\" + "Tehnika.pdf");
         MultipartFile multipartFile = new MockMultipartFile("file", "fil", "", is);
@@ -71,19 +132,6 @@ public class DataLoader implements ApplicationRunner{
 		
 		
 		//
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		/*
 		final String fp = System.getProperty("user.dir");
