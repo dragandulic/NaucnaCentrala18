@@ -1,6 +1,8 @@
 package naucnaCentrala.dto;
 
 public class LaborDTO {
+	
+	private Long id;
 
 	private String title;
 	
@@ -50,6 +52,14 @@ public class LaborDTO {
 
 	public void setActivemembership(String activemembership) {
 		this.activemembership = activemembership;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	

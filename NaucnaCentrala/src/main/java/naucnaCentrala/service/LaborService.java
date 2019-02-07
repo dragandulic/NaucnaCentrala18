@@ -93,6 +93,7 @@ public class LaborService {
 				else {
 					labordto.setMagazintype("noopenaccess");
 				}
+				labordto.setId(l.getId());
 				labordto.setTitle(l.getTitle());
 				labordto.setPricelabor(l.getPricelabor());
 				labordto.setUrldownload("http://localhost:8083/dbfile/downloadFile=" + l.getDbfile().getId());
