@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import naucnaCentrala.dto.LaborDTO;
 import naucnaCentrala.dto.MagazineDTO;
 import naucnaCentrala.model.Labor;
 import naucnaCentrala.service.LaborService;
@@ -28,9 +29,9 @@ public class LaborController {
 	
 	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR')")
 	@GetMapping("/laborsofmagazin/{idm}")
-	public ResponseEntity<ArrayList<Labor>> laborsOfMagazin(@PathVariable Long idm) {
+	public ResponseEntity<ArrayList<LaborDTO>> laborsOfMagazin(@PathVariable Long idm) {
 		
-		ArrayList<Labor> ret = laborService.getLabors(idm);
+		ArrayList<LaborDTO> ret = laborService.getLabors(idm);
 		
 		if(ret != null) {
 			return new ResponseEntity<>(ret, HttpStatus.OK);

@@ -59,7 +59,7 @@ public class UserController {
 	
 	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR')")
 	@GetMapping(value="/purchasedprops")
-	public ResponseEntity<List<PurchasedPropsDTO>> purchasedProps(){
+	public ResponseEntity<ArrayList<PurchasedPropsDTO>> purchasedProps(){
 		
 		ArrayList<PurchasedPropsDTO> res = userService.purchasedprops();
 		
@@ -67,8 +67,11 @@ public class UserController {
 			return new ResponseEntity<>(res, HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return null;
 	}
+	
+	
 	
 	
 	

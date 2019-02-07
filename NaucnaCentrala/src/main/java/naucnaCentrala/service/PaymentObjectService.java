@@ -1,6 +1,7 @@
 package naucnaCentrala.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -13,14 +14,21 @@ import org.springframework.web.client.RestTemplate;
 import naucnaCentrala.dto.TransactionDTO;
 import naucnaCentrala.model.Labor;
 import naucnaCentrala.model.Magazine;
+import naucnaCentrala.model.MembershipFee;
 import naucnaCentrala.model.PaymentObject;
 import naucnaCentrala.model.Transaction;
 import naucnaCentrala.model.User;
 import naucnaCentrala.repository.LaborRepository;
 import naucnaCentrala.repository.MagazineRepository;
+import naucnaCentrala.repository.MembershipfeeRepository;
 import naucnaCentrala.repository.PaymentObjectRepository;
 import naucnaCentrala.repository.TransactionRepository;
 import naucnaCentrala.repository.UserRepository;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 @Service
 public class PaymentObjectService {
@@ -43,7 +51,8 @@ public class PaymentObjectService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	
+	@Autowired
+	private MembershipfeeRepository membershipfeeRepository;
 	
 	public String createpaymentobject(Long id,String typee) {
 		boolean valido = false;
@@ -136,20 +145,96 @@ public class PaymentObjectService {
 				
 				Labor l = laborRepository.findByTitleEquals(s1);
 				
-				user.getPurchasedlabors().add(l);
-				
+				user.getPurchasedlabors().add(l);			
 				userRepository.save(user);
 				
 			}
 			else if(t.getTitle().contains("magazina") && t.getDescription().contains("magazina")) {
-				
-				
-				
+
 				Magazine m = magazineRepository.findByMerchantIdEquals(t.getMerchantid());
 				
 				user.getPurchasedmagazins().add(m);
-				
 				userRepository.save(user);
+				
+			}else if(t.getTitle().contains("clanarine") && t.getDescription().contains("clanarine")) {
+				
+				Magazine m = magazineRepository.findByMerchantIdEquals(t.getMerchantid());
+				
+				if(m!=null && user!=null) {
+					
+					MembershipFee membershipfee =  membershipfeeRepository.findByMagazine_idEqualsAndUser_idEquals(m.getId(), user.getId());
+					
+					//da li postoji clanarina tog nekog korisnika za taj neki magazin, ako ne postoji moramo je napraviti
+					//ako postoji samo se promeni datum
+					if(membershipfee == null) {
+						MembershipFee membe = new MembershipFee();
+						membe.setAmount(t.getAmount());
+						membe.setMagazin(m);
+						membe.setUser(user);
+
+						String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+						DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+						
+						Date now=null;
+						try {
+							now = formatter.parse(timeStamp);
+							membe.setStartdate(now);
+						} catch (ParseException e) {
+							  e.printStackTrace();
+						}
+						
+						DateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+						Calendar cal = Calendar.getInstance();
+						cal.add(Calendar.MONTH, +1);
+						Date end = cal.getTime();
+						String endString = formatter1.format(end);					
+						Date endDate=null;
+						try {
+							endDate = formatter1.parse(endString);
+							membe.setEnddate(endDate);
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+						
+						membershipfeeRepository.save(membe);
+						
+					}
+					else {
+						String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+						DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+						
+						Date now=null;
+						try {
+							now = formatter.parse(timeStamp);
+							membershipfee.setStartdate(now);
+						} catch (ParseException e) {
+							  e.printStackTrace();
+						}
+						
+						
+						DateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+						Calendar cal = Calendar.getInstance();
+						cal.add(Calendar.MONTH, +1);
+						Date end = cal.getTime();
+						String endString = formatter1.format(end);					
+						Date endDate=null;
+						try {
+							endDate = formatter1.parse(endString);
+							membershipfee.setEnddate(endDate);
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+						
+						membershipfeeRepository.save(membershipfee);
+						
+					}
+					
+					
+				}
+				
+				
+				
+				
 			}
 
 			return "uspeno";

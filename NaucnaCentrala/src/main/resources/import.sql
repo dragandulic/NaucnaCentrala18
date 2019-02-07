@@ -8,8 +8,10 @@ INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('2'
 INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('3','Saobracaj','SAOB');
 
 
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('1','Tehnika','0040-2176','8',1,'3','977dk4mdjw3bz82hd71abgm39dm48f','1','2');
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('2','Bankarstvo','1451-4354','9',1,'1','411sldmcv81yt6j5nf9q2nv0m4u7v9','2','3');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('1','Tehnika','0040-2176','8',0,'3','977dk4mdjw3bz82hd71abgm39dm48f','1','2');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('2','Bankarstvo','1451-4354','9',0,'1','411sldmcv81yt6j5nf9q2nv0m4u7v9','2','3');
+
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('3','Gradjevinarstvo','3312-0901','12',1,'1','411vkol342cdax9m18do5a38dvyw9e','3','2');
 
 
 INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('1','abstract', 'finalversion', 'kyeterms', '1', 'Analiza magnetopobudnih sila u multifaznim mašinama u sklopu integrisanih punjača za električna vozila', '1','1','1');
@@ -23,10 +25,8 @@ INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms
 INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('7','abstract', 'finalversion', 'kyeterms', '7', 'Tradicionalni i novi poslovni modeli u bankarskoj industriji', '2','2','2');
 
 
-
-
-
-
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('8','abstract', 'finalversion', 'kyeterms', '10', 'Nelinearna seizmička analiza stubova kontinualnog AB mosta', '2','3','1');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('9','abstract', 'finalversion', 'kyeterms', '11', 'Odvajanje grede konačne dužine od Vinklerove nezatežuće podloge pri dejstvu sile na kraju grede', '2','3','2');
 
 
 
@@ -44,13 +44,14 @@ INSERT INTO `naucnacentrala`.`role` (`id`, `description`, `name`) VALUES ('2','O
 
 
 
-INSERT INTO `naucnacentrala`.`user` (`id`, `city`, `confirmpassword`, `country`, `email`, `name`, `password`, `surname`, `membershipfee_id`) VALUES ('1','Berlin', '555', 'Germany', 'maki@gmail.com', 'Maja', '$2a$10$ekSZsklk65QTyPbeM44fK.E9M1E1KbjCp7R/sPRN/iBeeg1av1liW', 'Majic', '1');
+INSERT INTO `naucnacentrala`.`user` (`id`, `city`, `confirmpassword`, `country`, `email`, `name`, `password`, `surname`) VALUES ('1','Berlin', '555', 'Germany', 'maki@gmail.com', 'Maja', '$2a$10$ekSZsklk65QTyPbeM44fK.E9M1E1KbjCp7R/sPRN/iBeeg1av1liW', 'Majic');
+INSERT INTO `naucnacentrala`.`user` (`id`, `city`, `confirmpassword`, `country`, `email`, `name`, `password`, `surname`) VALUES ('2','Novi Sad', '777', 'Serbia', 'milos@gmail.com', 'Milos', '$2a$10$FHj/rYlKZIIt60smslJDO.KO/9W5wGjQwcnYojbL2AxvY4fpBqE1K', 'Amidzic');
+
 
 INSERT INTO `naucnacentrala`.`user_roles` (`user_id`, `roles_id`) VALUES ('1','2');
+INSERT INTO `naucnacentrala`.`user_roles` (`user_id`, `roles_id`) VALUES ('2','1');
 
-
-INSERT INTO `naucnacentrala`.`membership_fee` (`id`, `startdate`,`enddate`,`amount`) VALUES ('1','2018-12-15 00:00:00','2019-01-01 00:00:00','1');
-
-
+INSERT INTO `naucnacentrala`.`membership_fee` (`id`, `startdate`,`enddate`,`amount`,`user_id`,`magazine_id`) VALUES ('1','2018-12-15 00:00:00','2019-01-01 00:00:00','1','2','1');
+INSERT INTO `naucnacentrala`.`membership_fee` (`id`, `startdate`,`enddate`,`amount`,`user_id`,`magazine_id`) VALUES ('2','2018-12-16 00:00:00','2019-01-02 00:00:00','2','1','2');
 
 

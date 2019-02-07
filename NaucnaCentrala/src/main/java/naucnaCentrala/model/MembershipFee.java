@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import javax.persistence.Temporal;
@@ -23,15 +24,20 @@ public class MembershipFee {
 	private Long id;
 	
 	@Temporal(value = TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
 	private Date startdate;
 	
 	@Temporal(value = TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING,timezone = "Europe/Madrid")
 	private Date enddate;
 	
-	private String amount;
+	private double amount;
 	
+	@ManyToOne
+	private Magazine magazine;
+	
+	@ManyToOne
+	private User user;
 	
 	public MembershipFee() {
 		
@@ -61,12 +67,28 @@ public class MembershipFee {
 		this.enddate = enddate;
 	}
 
-	public String getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+
+	public Magazine getMagazin() {
+		return magazine;
+	}
+
+	public void setMagazin(Magazine magazin) {
+		this.magazine = magazin;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	

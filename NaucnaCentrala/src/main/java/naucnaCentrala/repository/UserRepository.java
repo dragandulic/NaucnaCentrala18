@@ -9,4 +9,6 @@ import naucnaCentrala.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	User findByEmail(String email);
+	
+	//User findByIdEqualsAndMembershipfee_idEquals(Long idu, Long idm);
 }

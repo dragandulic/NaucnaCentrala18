@@ -12,6 +12,14 @@ public class MagazineDTO {
 	private String chifeditor;
 	
 	private double amountmag;
+	
+	private String urldownload;
+	
+	private String userrole;
+	
+	private String type; //openaccess or noopenaccess
+	
+	private String activemembership; //da li korisnik ima aktivnu clanarinu 
 
 	public Long getId() {
 		return id;
@@ -51,6 +59,38 @@ public class MagazineDTO {
 
 	public void setAmountmag(double amountmag) {
 		this.amountmag = amountmag;
+	}
+
+	public String getUrldownload() {
+		return urldownload;
+	}
+
+	public void setUrldownload(String urldownload) {
+		this.urldownload = urldownload;
+	}
+
+	public String getUserrole() {
+		return userrole;
+	}
+
+	public void setUserrole(String userrole) {
+		this.userrole = userrole;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getActivemembership() {
+		return activemembership;
+	}
+
+	public void setActivemembership(String activemembership) {
+		this.activemembership = activemembership;
 	}
 	
 }

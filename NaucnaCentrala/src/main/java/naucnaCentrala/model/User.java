@@ -43,11 +43,7 @@ public class User {
 	
 	@ManyToMany
 	private List<Magazine> purchasedmagazins;
-	
-	
-	@OneToOne
-	private MembershipFee membershipfee;
-	
+		
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<Role> roles = new HashSet<>();
@@ -139,17 +135,7 @@ public class User {
 		this.roles = roles;
 	}
 
-
-	public MembershipFee getMembershipfee() {
-		return membershipfee;
-	}
-
-
-	public void setMembershipfee(MembershipFee membershipfee) {
-		this.membershipfee = membershipfee;
-	}
-
-
+	
 	public List<Labor> getPurchasedlabors() {
 		return purchasedlabors;
 	}

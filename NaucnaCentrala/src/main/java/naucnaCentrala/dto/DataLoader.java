@@ -111,6 +111,30 @@ public class DataLoader implements ApplicationRunner{
 	     
 	    DBFile db9 = dbFileService.storeFile(multipartFile9);
 	    
+	    
+	    File file10 = new File(fpp + "Nelinearna seizmička analiza stubova kontinualnog AB mosta.pdf");
+	    FileInputStream input10 = new FileInputStream(file10);
+	    MultipartFile multipartFile10 = new MockMultipartFile("file",
+	            file10.getName(), "application/pdf", IOUtils.toByteArray(input10));
+	     
+	    DBFile db10 = dbFileService.storeFile(multipartFile10);
+	    
+	    File file11 = new File(fpp + "Odvajanje grede konačne dužine od Vinklerove nezatežuće podloge pri dejstvu sile na kraju grede.pdf");
+	    FileInputStream input11 = new FileInputStream(file11);
+	    MultipartFile multipartFile11 = new MockMultipartFile("file",
+	            file11.getName(), "application/pdf", IOUtils.toByteArray(input11));
+	     
+	    DBFile db11 = dbFileService.storeFile(multipartFile11);
+	    
+	    
+	    File file12 = new File(fpp + "Magazin Gradjevinarstvo.pdf");
+	    FileInputStream input12 = new FileInputStream(file12);
+	    MultipartFile multipartFile12 = new MockMultipartFile("file",
+	            file12.getName(), "application/pdf", IOUtils.toByteArray(input12));
+	     
+	    DBFile db12 = dbFileService.storeFile(multipartFile12);
+	    
+	    
 		/*
 		InputStream is = getClass().getResourceAsStream("C:\\Users\\dragan\\Documents\\GitHub\\NaucnaCentrala18\\NaucnaCentrala\\Magazines\\" + "Tehnika.pdf");
         MultipartFile multipartFile = new MockMultipartFile("file", "fil", "", is);

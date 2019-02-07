@@ -39,7 +39,7 @@ public class AuthenticationController {
 						user.getPassword()
 				)
 		);
-		
+
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		final String token = jwtTokenUtil.generateToken(authentication);
