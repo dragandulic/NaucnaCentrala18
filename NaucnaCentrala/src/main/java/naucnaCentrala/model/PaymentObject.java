@@ -33,6 +33,8 @@ public class PaymentObject {
 	
 	private String fronturl;
 	
+	private String bitcointoken;
+	
 	public PaymentObject() {
 		
 	}
@@ -167,6 +169,18 @@ public class PaymentObject {
 
 	public void setFronturl(String fronturl) {
 		this.fronturl = fronturl;
+	}
+
+
+
+	public String getBitcointoken() {
+		return bitcointoken;
+	}
+
+
+
+	public void setBitcointoken(String bitcointoken) {
+		this.bitcointoken = bitcointoken;
 	}
 	
 	

@@ -8,10 +8,10 @@ INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('2'
 INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('3','Saobracaj','SAOB');
 
 
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('1','Tehnika','0040-2176','8',0,'3','977dk4mdjw3bz82hd71abgm39dm48f','1','2');
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('2','Bankarstvo','1451-4354','9',0,'1','411sldmcv81yt6j5nf9q2nv0m4u7v9','2','3');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`,`bitcointoken`) VALUES ('1','Tehnika','0040-2176','8',0,'3','977dk4mdjw3bz82hd71abgm39dm48f','1','2','VYAwg4CCyDxZDyLeRXinbSkJ6DzGbGQwFFK4utH2');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`,`bitcointoken`) VALUES ('2','Bankarstvo','1451-4354','9',0,'1','411sldmcv81yt6j5nf9q2nv0m4u7v9','2','3','63ia_f8W5zsz3yhZmgomWgJ7bqziwLiiQu9eYAmZ');
 
-INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`) VALUES ('3','Gradjevinarstvo','3312-0901','12',1,'1','411vkol342cdax9m18do5a38dvyw9e','3','2');
+INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`,`bitcointoken`) VALUES ('3','Gradjevinarstvo','3312-0901','12',1,'1','411vkol342cdax9m18do5a38dvyw9e','3','2','dCJnxHQ1f6Q3HQXfJWqoKRgFuDyfMMLeWFw-FNGN');
 
 
 INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('1','abstract', 'finalversion', 'kyeterms', '1', 'Analiza magnetopobudnih sila u multifaznim mašinama u sklopu integrisanih punjača za električna vozila', '1','1','1');

@@ -70,7 +70,7 @@ public class PaymentObjectService {
 					po.setMerchantid(l.getMagazine().getMerchant_id());
 					po.setMerchantpassword(l.getMagazine().getMerchant_password());
 					po.setMerchantmail(l.getMagazine().getName());
-					
+					po.setBitcointoken(l.getMagazine().getBitcointoken());
 					valido = true;
 				}
 			}
@@ -84,7 +84,7 @@ public class PaymentObjectService {
 					po.setMerchantid(m.getMerchant_id());
 					po.setMerchantpassword(m.getMerchant_password());
 					po.setMerchantmail(m.getName());
-					
+					po.setBitcointoken(m.getBitcointoken());
 					valido = true;
 				}
 
@@ -99,7 +99,7 @@ public class PaymentObjectService {
 					po.setMerchantid(m.getMerchant_id());
 					po.setMerchantpassword(m.getMerchant_password());
 					po.setMerchantmail(m.getName());
-					
+					po.setBitcointoken(m.getBitcointoken());
 					valido = true;
 				}
 				

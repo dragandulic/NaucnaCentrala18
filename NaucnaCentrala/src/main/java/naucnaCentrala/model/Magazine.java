@@ -54,6 +54,8 @@ public class Magazine {
 	
 	private double amountmag;
 	
+	private String bitcointoken;
+	
 	
 	
 	
@@ -195,6 +197,16 @@ public class Magazine {
 
 	public void setAmountmag(double amountmag) {
 		this.amountmag = amountmag;
+	}
+
+
+	public String getBitcointoken() {
+		return bitcointoken;
+	}
+
+
+	public void setBitcointoken(String bitcointoken) {
+		this.bitcointoken = bitcointoken;
 	}
 	
 	
