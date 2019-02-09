@@ -61,7 +61,7 @@ public class MagazineService {
 				magazinedto.setName(magazines.get(i).getName());
 				magazinedto.setChifeditor(magazines.get(i).getMaineditor().getName() + " " + magazines.get(i).getMaineditor().getSurname());
 				magazinedto.setAmountmag(magazines.get(i).getAmountMag());
-				magazinedto.setUrldownload("http://localhost:8083/dbfile/downloadFile=" + magazines.get(i).getDbfile().getId());
+				magazinedto.setUrldownload("http://localhost:8038/dbfile/downloadFile=" + magazines.get(i).getDbfile().getId());
 				magazinedto.setUserrole(u.getRoles().get(0).getName());
 				if(magazines.get(i).isMethodpayment()) {
 					magazinedto.setType("openaccess");
@@ -70,8 +70,14 @@ public class MagazineService {
 					magazinedto.setType("noopenaccess");
 				}
 				
+				magazinedto.setBought("nobought");
+				for(int j=0;j<u.getPurchasedmagazins().size();j++) {
+					if(u.getPurchasedmagazins().get(j).getMerchant_id().equals(magazines.get(i).getMerchant_id())) {
+						magazinedto.setBought("yesbought");
+					}
+				}
 				
-				
+	
 				String timeStamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime());
 				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 				

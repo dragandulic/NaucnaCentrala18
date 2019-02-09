@@ -20,6 +20,8 @@ public class MagazineDTO {
 	private String type; //openaccess or noopenaccess
 	
 	private String activemembership; //da li korisnik ima aktivnu clanarinu 
+	
+	private String bought;
 
 	public Long getId() {
 		return id;
@@ -91,6 +93,14 @@ public class MagazineDTO {
 
 	public void setActivemembership(String activemembership) {
 		this.activemembership = activemembership;
+	}
+
+	public String getBought() {
+		return bought;
+	}
+
+	public void setBought(String bought) {
+		this.bought = bought;
 	}
 	
 }

@@ -108,7 +108,7 @@ public class PaymentObjectService {
 			
 			if(valido) {
 				po.setFronturl("http://localhost:8081/#/dashboard/profile");
-				po.setSuccessUrl("http://localhost:8083/paymentobject/savetransaction");
+				po.setSuccessUrl("http://localhost:8038/paymentobject/savetransaction");
 				String useremail = "";
 				Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 				if (principal instanceof UserDetails) {
@@ -262,11 +262,13 @@ public class PaymentObjectService {
 				TransactionDTO trans = new TransactionDTO();
 				trans.setAmount(t.getAmount());
 				trans.setCurrency(t.getCurrency());
+				if(!t.getType().equals("bank")) {
+					String d = t.getDatetime();
+					String[] delovi = d.split("T");
+					String[] delovi2 = delovi[1].split("\\+");			
+					t.setDatetime(delovi[0]+" "+delovi2[0]);
+				}
 				
-				String d = t.getDatetime();
-				String[] delovi = d.split("T");
-				String[] delovi2 = delovi[1].split("\\+");			
-				t.setDatetime(delovi[0]+" "+delovi2[0]);
 				
 				trans.setDate(t.getDatetime());
 				trans.setMerchantmail(t.getMerchantmail());

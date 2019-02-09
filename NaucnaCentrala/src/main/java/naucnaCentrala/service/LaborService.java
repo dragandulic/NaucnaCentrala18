@@ -96,13 +96,20 @@ public class LaborService {
 				labordto.setId(l.getId());
 				labordto.setTitle(l.getTitle());
 				labordto.setPricelabor(l.getPricelabor());
-				labordto.setUrldownload("http://localhost:8083/dbfile/downloadFile=" + l.getDbfile().getId());
+				labordto.setUrldownload("http://localhost:8038/dbfile/downloadFile=" + l.getDbfile().getId());
 				if(pom) {
 					labordto.setActivemembership("validmembershipf");
 				}
 				else {
 					labordto.setActivemembership("novalidmembershipf");
 				}
+				labordto.setBought("nobought");
+				for(int k=0;k<u.getPurchasedlabors().size();k++) {
+					if(u.getPurchasedlabors().get(k).getTitle().equals(l.getTitle())) {
+						labordto.setBought("yesbought");
+					}
+				}
+				
 				retlist.add(labordto);
 			}
 			

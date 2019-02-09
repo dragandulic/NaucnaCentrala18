@@ -97,7 +97,7 @@ public class UserService implements UserDetailsService{
 			PurchasedPropsDTO p = new PurchasedPropsDTO();
 			p.setType("Labor");
 			p.setName(l.getTitle());
-			p.setDownloadurl("http://localhost:8083/dbfile/downloadFile=" + l.getDbfile().getId());
+			p.setDownloadurl("http://localhost:8038/dbfile/downloadFile=" + l.getDbfile().getId());
 			res.add(p);
 			pom=true;
 		}
@@ -106,7 +106,7 @@ public class UserService implements UserDetailsService{
 			PurchasedPropsDTO p = new PurchasedPropsDTO();
 			p.setType("Magazine");
 			p.setName(m.getName());
-			p.setDownloadurl("http://localhost:8083/dbfile/downloadFile=" + m.getDbfile().getId());
+			p.setDownloadurl("http://localhost:8038/dbfile/downloadFile=" + m.getDbfile().getId());
 			res.add(p);
 			pom=true;
 		}

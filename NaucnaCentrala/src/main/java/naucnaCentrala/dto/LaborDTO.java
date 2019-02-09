@@ -13,6 +13,16 @@ public class LaborDTO {
 	private String magazintype; // openaccess or noopenaccess
 	
 	private String activemembership;
+	
+	private String bought;
+
+	public String getBought() {
+		return bought;
+	}
+
+	public void setBought(String bought) {
+		this.bought = bought;
+	}
 
 	public String getTitle() {
 		return title;
