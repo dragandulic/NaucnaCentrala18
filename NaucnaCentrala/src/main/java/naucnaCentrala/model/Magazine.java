@@ -2,6 +2,7 @@ package naucnaCentrala.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -132,8 +133,13 @@ public class Magazine {
 	}
 
 
-	public Set<ScientificArea> getScientificarea() {
-		return scientificarea;
+	public ArrayList<ScientificArea> getScientificarea() {
+		List<ScientificArea> retlist = new ArrayList<>(scientificarea);
+		if(retlist.size() > 0) {
+			return (ArrayList<ScientificArea>) retlist;
+		}
+		return null;
+		
 	}
 
 

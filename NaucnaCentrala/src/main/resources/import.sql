@@ -3,9 +3,7 @@ INSERT INTO `naucnacentrala`.`editor_reviewer` (`id`, `name`,`surname`,`email`,`
 INSERT INTO `naucnacentrala`.`editor_reviewer` (`id`, `name`,`surname`,`email`,`city`,`country`,`password`, `iseditor`, `isreviewer`) VALUES ('3','Aleksandra','Grujic','saska@gmail.com','Novi Sad','Srbija','333',1,0);
 
 
-INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('1','Elektrotehnika','ELE');
-INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('2','Ekonomija','EKON');
-INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('3','Saobracaj','SAOB');
+
 
 
 INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`,`bitcointoken`,`client_id`,`client_secret`) VALUES ('1','Tehnika','0040-2176','8',0,'3','977dk4mdjw3bz82hd71abgm39dm48f','1','2','VYAwg4CCyDxZDyLeRXinbSkJ6DzGbGQwFFK4utH2','Ae_veWhOruZQCZjrHCUBECmnkXvoEhO_vhIZGCkglx1qvqyGkI22FQVRxtfaeJP1CTL2NZMQJZZHyhXc','EJV26g8cD_0Fl4cCafn17KSp8eDuJEVvVEz_PM3IRSzvh64M-pCqAsz3fx_zraNNL5xTI6q0-kTNJ2HO');
@@ -29,9 +27,17 @@ INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms
 INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('9','abstract', 'finalversion', 'kyeterms', '11', 'Odvajanje grede konačne dužine od Vinklerove nezatežuće podloge pri dejstvu sile na kraju grede', '2','3','2');
 
 
-
+INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('1','Elektrotehnika','ELE');
+INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('2','Ekonomija','EKON');
+INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('3','Saobracaj','SAOB');
 
 INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('1','1');
+INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('1','2');
+INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('2','2');
+INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('2','3');
+INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('3','1');
+INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('3','2');
+INSERT INTO `naucnacentrala`.`magazine_scientificarea` (`magazine_id`, `scientificarea_id`) VALUES ('3','3');
 
 
 INSERT INTO `naucnacentrala`.`magazine_reviewers` (`magazine_id`, `reviewers_id`) VALUES ('1','2');
