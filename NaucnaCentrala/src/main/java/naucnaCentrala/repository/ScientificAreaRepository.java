@@ -9,6 +9,6 @@ import naucnaCentrala.model.ScientificArea;
 public interface ScientificAreaRepository extends JpaRepository<ScientificArea, Long>{
 
 	
-	
+	ScientificArea findByIdEquals(Long id);
 	
 }

@@ -15,9 +15,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import naucnaCentrala.config.TokenProvider;
 import naucnaCentrala.dto.MagazineDTO;
+import naucnaCentrala.model.EditorReviewer;
 import naucnaCentrala.model.Magazine;
 import naucnaCentrala.model.MembershipFee;
 import naucnaCentrala.model.User;
+import naucnaCentrala.repository.EditorReviewerRepository;
 import naucnaCentrala.repository.MagazineRepository;
 import naucnaCentrala.repository.MembershipfeeRepository;
 import naucnaCentrala.repository.UserRepository;
@@ -38,6 +40,9 @@ public class MagazineService {
 	@Autowired
 	private MembershipfeeRepository membershipfeeRepository;
 	
+	@Autowired
+	private EditorReviewerRepository editorReviewerRepository;
+	
 	public List<MagazineDTO> listofMagazine(){
 		
 		String useremail = "";
@@ -51,6 +56,7 @@ public class MagazineService {
 		User u = userRepository.findByEmail(useremail);
 		
 		List<Magazine> magazines = magazineRepository.findAll();
+		EditorReviewer r = editorReviewerRepository.findByEmail(useremail);
 		List<MagazineDTO> retlist = new ArrayList<>();
 		if(magazines != null) {
 			
@@ -62,45 +68,57 @@ public class MagazineService {
 				magazinedto.setChifeditor(magazines.get(i).getMaineditor().getName() + " " + magazines.get(i).getMaineditor().getSurname());
 				magazinedto.setAmountmag(magazines.get(i).getAmountMag());
 				magazinedto.setUrldownload("http://localhost:8038/dbfile/downloadFile=" + magazines.get(i).getDbfile().getId());
-				magazinedto.setUserrole(u.getRoles().get(0).getName());
-				if(magazines.get(i).isMethodpayment()) {
-					magazinedto.setType("openaccess");
-				}
-				else {
-					magazinedto.setType("noopenaccess");
+				
+				if(r!=null) {
+					magazinedto.setUserrole(r.getRoles().get(0).getName());
 				}
 				
-				magazinedto.setBought("nobought");
-				for(int j=0;j<u.getPurchasedmagazins().size();j++) {
-					if(u.getPurchasedmagazins().get(j).getMerchant_id().equals(magazines.get(i).getMerchant_id())) {
-						magazinedto.setBought("yesbought");
-					}
-				}
-				
-	
-				String timeStamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime());
-				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-				
-				MembershipFee membershipfee = membershipfeeRepository.findByMagazine_idEqualsAndUser_idEquals(magazines.get(i).getId(), u.getId());
-				
-				if(membershipfee != null) {
-					Date now=null;
-					try {
-						now = formatter.parse(timeStamp);
-						} catch (ParseException e) {
-						  e.printStackTrace();
-						}
+				if(u != null) {
+					magazinedto.setUserrole(u.getRoles().get(0).getName());
 					
-					if(now.compareTo(membershipfee.getEnddate())<=0  && now.compareTo(membershipfee.getStartdate())>=0){
-						magazinedto.setActivemembership("validmembershipf");
+					
+					if(magazines.get(i).isMethodpayment()) {
+						magazinedto.setType("openaccess");
+					}
+					else {
+						magazinedto.setType("noopenaccess");
+					}
+					
+					magazinedto.setBought("nobought");
+					for(int j=0;j<u.getPurchasedmagazins().size();j++) {
+						if(u.getPurchasedmagazins().get(j).getMerchant_id().equals(magazines.get(i).getMerchant_id())) {
+							magazinedto.setBought("yesbought");
+						}
+					}
+					
+		
+					String timeStamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime());
+					DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					
+					MembershipFee membershipfee = membershipfeeRepository.findByMagazine_idEqualsAndUser_idEquals(magazines.get(i).getId(), u.getId());
+					
+					if(membershipfee != null) {
+						Date now=null;
+						try {
+							now = formatter.parse(timeStamp);
+							} catch (ParseException e) {
+							  e.printStackTrace();
+							}
+						
+						if(now.compareTo(membershipfee.getEnddate())<=0  && now.compareTo(membershipfee.getStartdate())>=0){
+							magazinedto.setActivemembership("validmembershipf");
+						}
+						else {
+							magazinedto.setActivemembership("novalidmembershipf");
+						}
 					}
 					else {
 						magazinedto.setActivemembership("novalidmembershipf");
 					}
+					
+					
 				}
-				else {
-					magazinedto.setActivemembership("novalidmembershipf");
-				}
+				
 			
 				retlist.add(magazinedto);
 			}

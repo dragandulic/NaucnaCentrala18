@@ -9,6 +9,6 @@ import naucnaCentrala.model.EditorReviewer;
 public interface EditorReviewerRepository extends JpaRepository<EditorReviewer, Long> {
 
 	
-
+	EditorReviewer findByEmail(String s);
 	
 }

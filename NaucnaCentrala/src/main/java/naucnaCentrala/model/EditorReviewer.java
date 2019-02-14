@@ -2,10 +2,13 @@ package naucnaCentrala.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,6 +50,8 @@ public class EditorReviewer {
 	@ManyToMany  //editor moze da ima vise naucnih oblasti a i naucna oblast moze da pripada vise editora
 	private Set<ScientificArea> scientificarea = new HashSet<>();   //naucne oblasti koje pokriva
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	private Set<Role> roles = new HashSet<>();
 
 	
 	public EditorReviewer() {
@@ -165,7 +170,19 @@ public class EditorReviewer {
 	
 	
 	
-	
+	public List<Role> getRoles() {
+		List<Role> retlist = new ArrayList<>(roles);
+		if(retlist.size() > 0) {
+			return retlist;
+		}
+		return null;
+	}
+
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	
 	
 	

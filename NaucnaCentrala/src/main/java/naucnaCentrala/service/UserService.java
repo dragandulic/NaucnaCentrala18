@@ -11,9 +11,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import naucnaCentrala.dto.PurchasedPropsDTO;
+import naucnaCentrala.model.EditorReviewer;
 import naucnaCentrala.model.Labor;
 import naucnaCentrala.model.Magazine;
 import naucnaCentrala.model.User;
+import naucnaCentrala.repository.EditorReviewerRepository;
 import naucnaCentrala.repository.UserRepository;
 
 import static java.util.Collections.emptyList;
@@ -31,6 +33,9 @@ public class UserService implements UserDetailsService{
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private EditorReviewerRepository editorReviewerRepository;
 	
 	public String singup(User user) {
 		
@@ -61,13 +66,18 @@ public class UserService implements UserDetailsService{
 		User user = userRepository.findByEmail(email);
 		System.out.println("POZIV 8");
 		if(user == null) {
-			throw new UsernameNotFoundException(email);
+			EditorReviewer er = editorReviewerRepository.findByEmail(email);
+			if(er == null) {
+				throw new UsernameNotFoundException(email);
+			}
+			return new org.springframework.security.core.userdetails.User(er.getEmail(), er.getPassword(), getAuthorityed(er));
 		}
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
 		
 		
 	}
 	
+	//prvili smo ovde dve iste metode jer su nam editor ireviewre u jednoj klasi a user i author u drugoj
 	private Set<SimpleGrantedAuthority> getAuthority(User user){
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 		user.getRoles().forEach(role ->{
@@ -76,7 +86,13 @@ public class UserService implements UserDetailsService{
 		return authorities;
 	}
 	
-	
+	private Set<SimpleGrantedAuthority> getAuthorityed(EditorReviewer user){
+		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+		user.getRoles().forEach(role ->{
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+		});
+		return authorities;
+	}
 	
 	public ArrayList<PurchasedPropsDTO> purchasedprops() {
 		

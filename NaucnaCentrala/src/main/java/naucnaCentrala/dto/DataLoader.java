@@ -135,6 +135,17 @@ public class DataLoader implements ApplicationRunner{
 	    DBFile db12 = dbFileService.storeFile(multipartFile12);
 	    
 	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 		/*
 		InputStream is = getClass().getResourceAsStream("C:\\Users\\dragan\\Documents\\GitHub\\NaucnaCentrala18\\NaucnaCentrala\\Magazines\\" + "Tehnika.pdf");
         MultipartFile multipartFile = new MockMultipartFile("file", "fil", "", is);

@@ -27,7 +27,7 @@ public class MagazineController {
 	@Autowired
 	private MagazineService magazineService;
 	
-	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR')")
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
 	@GetMapping("/listofmagazines")
 	public ResponseEntity<List<MagazineDTO>> listOfMagazines() {
 		

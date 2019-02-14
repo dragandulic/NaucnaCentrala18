@@ -33,11 +33,26 @@ public class Labor {
 
 	private double pricelabor;
 	
+	private String state;
+	//verified - rad je provaren i prihvacen
+	//processing - rad se proverava
+	//rejected - rad je odbijen i proces se terminira
+	
 	public Labor() {
 		
 	}
 	
 	
+	public String getState() {
+		return state;
+	}
+
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
