@@ -6,8 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,7 +53,8 @@ public class LaborService {
 	@Autowired
 	private ScientificAreaRepository scientificAreaRepository;
 	
-
+	@Autowired
+	private TaskService taskService;
 	
 	public ArrayList<LaborDTO> getLabors(Long idm){
 		
@@ -182,7 +187,30 @@ public class LaborService {
 	
 	
 
-	
+	public String addLabortask(Labor labor, String taskid) {
+		
+		//Task task1 = taskService.createTaskQuery().processInstanceId(procesid).singleResult();
+		
+		
+		Map<String, Object> variables = new HashMap<>();
+		
+		variables.put("titlelabor",labor.getTitle());
+		variables.put("keyterms", labor.getKeyterms());
+		variables.put("scientificarea",labor.getScientificarea().getName());
+		variables.put("abstract", labor.getAbstrct());
+		variables.put("pdf", "http://localhost:8038/dbfile/downloadFile=" + labor.getDbfile().getId());
+		variables.put("coauthors", labor.getCoautors());
+		
+		
+		taskService.complete(taskid, variables);
+		
+		/*
+		Task task2 = taskService.createTaskQuery().processInstanceId(procesid).singleResult();
+		System.out.println("(3)Aktivni task ID=" + task2.getId());
+		*/
+		
+		return "ok";
+	}
 	
 	
 	

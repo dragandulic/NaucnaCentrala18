@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import naucnaCentrala.model.EditorReviewer;
+import naucnaCentrala.model.Labor;
 import naucnaCentrala.model.User;
 
 import org.springframework.mail.MailException;
@@ -22,15 +23,15 @@ public class EmailService {
 	
 	
 	
-	public void SendUser(User user) throws MailException, InterruptedException {
+	public void SendUser(User user, Labor l) throws MailException, InterruptedException {
 		
 		
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setTo(user.getEmail());
 		email.setFrom(env.getProperty("spring.mail.username"));
 		
-		email.setSubject("Poziv na predstavu/film");
-		String text = "Text maila";
+		email.setSubject("Prijava novog rada");
+		String text = "Prijava novog rada '" + l.getTitle() + "' u casopisu '" + l.getMagazine().getName() + "'.";
 				
 		email.setText(text);
 		
@@ -39,15 +40,15 @@ public class EmailService {
 	}
 	
 	
-	public void SendEditor(EditorReviewer er) throws MailException, InterruptedException {
+	public void SendEditor(EditorReviewer er, Labor l) throws MailException, InterruptedException {
 		
 		
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setTo(er.getEmail());
 		email.setFrom(env.getProperty("spring.mail.username"));
 		
-		email.setSubject("Poziv na predstavu/film");
-		String text = "Text maila";
+		email.setSubject("Prijava novog rada");
+		String text = "Prijava novog rada '" + l.getTitle() + "' u casopisu '" + l.getMagazine().getName() + "'.";
 				
 		email.setText(text);
 		

@@ -25,10 +25,10 @@ public class ScientificAreaController {
 	
 	
 	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR')")
-	@GetMapping(value="/getscientificareao/{idm}")
-	public ResponseEntity<ArrayList<ScientificArea>> getScientificArea(@PathVariable Long idm){
+	@GetMapping(value="/getscientificareao/{taskid}")
+	public ResponseEntity<ArrayList<ScientificArea>> getScientificArea(@PathVariable String taskid){
 		
-		ArrayList<ScientificArea> res = scientificAreaService.getscientificarea(idm);
+		ArrayList<ScientificArea> res = scientificAreaService.getscientificarea(taskid);
 		
 		if(res != null) {
 			return new ResponseEntity<>(res, HttpStatus.OK);

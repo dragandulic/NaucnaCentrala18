@@ -26,6 +26,8 @@ public class Labor {
 	@OneToOne
 	private DBFile dbfile;
 	
+	private String coautors;
+	
 	private String finalversion;
 	
 	@ManyToOne
@@ -43,6 +45,16 @@ public class Labor {
 	}
 	
 	
+	public String getCoautors() {
+		return coautors;
+	}
+
+
+	public void setCoautors(String coautors) {
+		this.coautors = coautors;
+	}
+
+
 	public String getState() {
 		return state;
 	}

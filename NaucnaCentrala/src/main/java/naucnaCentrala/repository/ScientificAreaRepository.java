@@ -11,4 +11,5 @@ public interface ScientificAreaRepository extends JpaRepository<ScientificArea, 
 	
 	ScientificArea findByIdEquals(Long id);
 	
+	ScientificArea findByNameEquals(String name);
 }
