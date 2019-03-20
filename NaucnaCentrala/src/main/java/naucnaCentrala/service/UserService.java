@@ -12,10 +12,14 @@ import org.springframework.stereotype.Service;
 
 import naucnaCentrala.dto.PurchasedPropsDTO;
 import naucnaCentrala.model.EditorReviewer;
+import naucnaCentrala.model.EditorSA;
 import naucnaCentrala.model.Labor;
 import naucnaCentrala.model.Magazine;
+import naucnaCentrala.model.Reviewer;
 import naucnaCentrala.model.User;
 import naucnaCentrala.repository.EditorReviewerRepository;
+import naucnaCentrala.repository.EditorSARepository;
+import naucnaCentrala.repository.ReviewerRepository;
 import naucnaCentrala.repository.UserRepository;
 
 import static java.util.Collections.emptyList;
@@ -36,6 +40,12 @@ public class UserService implements UserDetailsService{
 	
 	@Autowired
 	private EditorReviewerRepository editorReviewerRepository;
+	
+	@Autowired
+	private EditorSARepository editorSARepository;
+	
+	@Autowired
+	private ReviewerRepository reviewerRepository;
 	
 	public String singup(User user) {
 		
@@ -63,15 +73,28 @@ public class UserService implements UserDetailsService{
 	// ga nadje.
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		
 		User user = userRepository.findByEmail(email);
-		System.out.println("POZIV 8");
 		if(user == null) {
 			EditorReviewer er = editorReviewerRepository.findByEmail(email);
 			if(er == null) {
-				throw new UsernameNotFoundException(email);
+				
+				EditorSA e = editorSARepository.findByUsernameEquals(email);
+				
+				if(e == null) {
+					Reviewer r = reviewerRepository.findByUsernameEquals(email);
+					if(r == null) {
+						throw new UsernameNotFoundException(email);
+					}
+					return new org.springframework.security.core.userdetails.User(r.getUsername(), r.getPassword(), getAuthorityeddd(r));
+
+				}
+				return new org.springframework.security.core.userdetails.User(e.getUsername(), e.getPassword(), getAuthorityedd(e));
 			}
 			return new org.springframework.security.core.userdetails.User(er.getEmail(), er.getPassword(), getAuthorityed(er));
 		}
+		
+
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
 		
 		
@@ -93,6 +116,26 @@ public class UserService implements UserDetailsService{
 		});
 		return authorities;
 	}
+	
+	private Set<SimpleGrantedAuthority> getAuthorityedd(EditorSA user){
+		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+		user.getRoles().forEach(role ->{
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+		});
+
+		return authorities;
+	}
+	
+	
+	private Set<SimpleGrantedAuthority> getAuthorityeddd(Reviewer user){
+		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+		user.getRoles().forEach(role ->{
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+		});
+
+		return authorities;
+	}
+	
 	
 	public ArrayList<PurchasedPropsDTO> purchasedprops() {
 		

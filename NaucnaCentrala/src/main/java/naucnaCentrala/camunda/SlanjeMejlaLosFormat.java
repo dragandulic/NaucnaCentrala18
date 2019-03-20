@@ -15,7 +15,7 @@ import naucnaCentrala.repository.MagazineRepository;
 import naucnaCentrala.repository.UserRepository;
 
 @Service
-public class SlanjeMejlaOdbijanja implements JavaDelegate {
+public class SlanjeMejlaLosFormat implements JavaDelegate {
 
 	
 	@Autowired
@@ -31,10 +31,11 @@ public class SlanjeMejlaOdbijanja implements JavaDelegate {
 	@Autowired
 	private MagazineRepository magazineRepository;
 	
+	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception, MailException, InterruptedException {
 		// TODO Auto-generated method stub
-
+		
 		
 		String username = (String) execution.getVariable("authoremail");
 		
@@ -45,14 +46,16 @@ public class SlanjeMejlaOdbijanja implements JavaDelegate {
 		
 		Magazine m = magazineRepository.findByIdEquals(Long.valueOf(execution.getVariable("magazinid").toString()).longValue());
 		
-		email.setSubject("Odbijanje rada");
-		String text = "Obavestavamo Vas da je rad '" + execution.getVariable("titlelabor").toString() + "' u casopisu '" + m.getName()  + "' odbijen jer nije tematski prikladan.";
+		email.setSubject("Los format");
+		String text = "Obavestavamo Vas da rad '" + execution.getVariable("titlelabor").toString() + "' u casopisu '" + m.getName()  + "' nije dobro formatiran.";
 				
 		email.setText(text);
-		System.out.println("Slanje mejla odbojnice...");
+		System.out.println("Slanje mejla, format rada nije dobar...");
 		javaMailSender.send(email);
-		System.out.println("Mail odbojnice poslat!");
+		System.out.println("Mail poslat!");
 		
 	}
 
+	
+	
 }

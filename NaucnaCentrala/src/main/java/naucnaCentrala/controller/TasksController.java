@@ -9,13 +9,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import naucnaCentrala.dto.FieldsCamundaDTO;
+import naucnaCentrala.dto.FormFieldsDTO;
 import naucnaCentrala.dto.ResponseDTO;
 import naucnaCentrala.dto.ReviewLaborDTO;
+import naucnaCentrala.dto.ReviewerDTO;
 import naucnaCentrala.dto.TaskCamunda;
+import naucnaCentrala.model.EditorSA;
+import naucnaCentrala.model.Magazine;
+import naucnaCentrala.model.Reviewer;
+import naucnaCentrala.model.ScientificArea;
+import naucnaCentrala.repository.MagazineRepository;
+import naucnaCentrala.repository.ReviewerRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +40,14 @@ import org.camunda.bpm.engine.form.FormField;
 import org.camunda.bpm.engine.form.TaskFormData;
 import org.camunda.bpm.engine.task.Task;
 
+//U magazinu tehnika naucna oblast MASINSTVO nema urednika naucne oblasti
+//U magazinu bankarstvo naucna oblast EKONOMIJA nema recenzente
+//U magazinu gradjevinarstvo naucna oblast SAOBRACAJ nema recenzente
+//Za naucnu oblsat ELEKTROTEHNIKA revjueris su : 1,2,3,4
+//Za naucnu oblsat MASINSTVO revjueris su : 5,6,7
+//Za naucnu oblsat FINANSIJE revjueris su : 1,5,8,9
+//Za naucnu oblsat ELEKTROTEHNIKA revjueris su : 1,2,3,4
+//Za naucnu oblsat ZELEZNICA revjueris su : 10,11
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -46,6 +64,12 @@ public class TasksController {
 	
 	@Autowired
 	private FormService formService;
+	
+	@Autowired
+	private MagazineRepository magazineRepository;
+	
+	@Autowired
+	private ReviewerRepository reviewerRepository;
 	
 	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
 	@GetMapping("/mytasks")
@@ -97,6 +121,10 @@ public class TasksController {
 				return "reviewlabor";
 			case "Pregled pdf":
 				return "reviewpdf";
+			case "Autor ponovo unosi pdf":
+				return "labornotformatted";
+			case "Izbor recezenata":
+				return "choosereviewer";
 		}
 		return "ostani";
 	}
@@ -110,7 +138,7 @@ public class TasksController {
 		lista.add("Saska");
 		lista.add("Dragan");
 		lista.add("Marko");
-		System.out.println(lista.get(2));
+		
 		
 		TaskFormData taskFormData = formService.getTaskFormData(taskid);
 		ArrayList<FormField> formfields = (ArrayList<FormField>) taskFormData.getFormFields();
@@ -173,6 +201,185 @@ public class TasksController {
 		
 	}
 	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@PostMapping("/completereviewpdf/{taskid}/{result}")
+	public ResponseEntity<String> completeReviewPdf(@PathVariable String taskid, @PathVariable String result, @RequestBody FormFieldsDTO dataa) {
+	
+		HashMap<String, Object> mapp = new HashMap<>();
+		if(result.equals("accept")) {
+			mapp.put("formatRada", true);
+			mapp.put("komentarurednika", "");
+			
+			Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+			String procesInstanceId = task.getProcessInstanceId();
+			
+			Long idm = (Long) runtimeService.getVariable(procesInstanceId, "magazinid");
+			String scientificarea = (String) runtimeService.getVariable(procesInstanceId, "scientificarea");
+			Magazine magazine = magazineRepository.findByIdEquals(idm);
+			
+			boolean pom = false;
+			for(EditorSA e : magazine.getEditorsa()) {
+				if(e.getScientificaArea().getName().equals(scientificarea)) {
+					mapp.put("editorsa", e.getUsername());
+					pom = true;
+				}
+			} 
+			if(!pom) {
+				String maindeditor = (String) runtimeService.getVariable(procesInstanceId, "maineditor");
+				mapp.put("editorsa", maindeditor);
+				pom = true;
+			}
+			
+		}
+		else if(result.equals("decline")) {
+			mapp.put("formatRada", false);
+			mapp.put("komentarurednika", dataa.getValue());
+		}
+		
+		taskService.complete(taskid, mapp);
+		return new ResponseEntity<>("uspesno", HttpStatus.OK);
+	}
+	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/labornotformatted/{taskid}")
+	public ResponseEntity<ArrayList<FormFieldsDTO>> laborNotFormated(@PathVariable String taskid) {
+		
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		String titleLabor = (String) runtimeService.getVariable(procesInstanceId, "titlelabor");
+		String coauthors = (String) runtimeService.getVariable(procesInstanceId, "coauthors");
+		String keyterms = (String) runtimeService.getVariable(procesInstanceId, "keyterms");
+		String scientificarea = (String) runtimeService.getVariable(procesInstanceId, "scientificarea");
+		String apstract = (String) runtimeService.getVariable(procesInstanceId, "abstract");
+		String pdf = (String) runtimeService.getVariable(procesInstanceId, "pdf");
+		String komentarurednika = (String) runtimeService.getVariable(procesInstanceId, "komentarurednika");
+		
+		FormFieldsDTO field1 = new FormFieldsDTO("titleLabor", titleLabor);
+		FormFieldsDTO field2 = new FormFieldsDTO("coauthors", coauthors);
+		FormFieldsDTO field3 = new FormFieldsDTO("keyterms", keyterms);
+		FormFieldsDTO field4 = new FormFieldsDTO("scientificarea", scientificarea);
+		FormFieldsDTO field5 = new FormFieldsDTO("apstract", apstract);
+		FormFieldsDTO field6 = new FormFieldsDTO("pdf", pdf);
+		FormFieldsDTO field7 = new FormFieldsDTO("komentarurednika", komentarurednika);
+
+		ArrayList<FormFieldsDTO> ret = new ArrayList<>();
+		ret.add(field1);
+		ret.add(field2);
+		ret.add(field3);
+		ret.add(field4);
+		ret.add(field5);
+		ret.add(field6);
+		ret.add(field7);
+		
+		return new ResponseEntity<>(ret, HttpStatus.OK);
+		
+	}
+	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/reviewrofmagazine/{taskid}")
+	public ResponseEntity<ArrayList<ReviewerDTO>> reviewerOfMagazine(@PathVariable String taskid){
+		
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		
+		Long idm = (Long) runtimeService.getVariable(procesInstanceId, "magazinid");
+		String scientificarea = (String) runtimeService.getVariable(procesInstanceId, "scientificarea");
+		Magazine magazine = magazineRepository.findByIdEquals(idm);
+		
+		ArrayList<Reviewer> listReviewer = (ArrayList<Reviewer>) reviewerRepository.findAll();
+		ArrayList<ReviewerDTO> retList = new ArrayList();
+		for(ScientificArea s : magazine.getScientificarea()) {
+			for(Reviewer r : listReviewer) {
+				for(ScientificArea sa : r.getScientificaArea()) {
+					if(sa.getName().equals(s.getName())) {
+						ReviewerDTO reviewerdto = new ReviewerDTO();
+						reviewerdto.setName(r.getName());
+						reviewerdto.setSurname(r.getSurname());
+						reviewerdto.setScientificarea(s.getName());
+						reviewerdto.setId(r.getId());
+						retList.add(reviewerdto);
+					}
+				}	
+			}
+		}
+		System.out.println("SIZEEEEEEEEEE: " + retList.size());
+		
+		
+		
+		return new ResponseEntity<>(retList, HttpStatus.OK);
+	}
+	
+	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/filtereviwer/{taskid}")
+	public ResponseEntity<ArrayList<ReviewerDTO>> filterReviewer(@PathVariable String taskid){
+		
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		
+		Long idm = (Long) runtimeService.getVariable(procesInstanceId, "magazinid");
+		String scientificarea = (String) runtimeService.getVariable(procesInstanceId, "scientificarea");
+		Magazine magazine = magazineRepository.findByIdEquals(idm);
+		
+		ArrayList<Reviewer> listReviewer = (ArrayList<Reviewer>) reviewerRepository.findAll();
+		ArrayList<ReviewerDTO> retList = new ArrayList();
+		System.out.println("AAAAAAAAAAa");
+		
+			for(Reviewer r : listReviewer) {
+				for(ScientificArea sa : r.getScientificaArea()) {
+					if(sa.getName().equals(scientificarea)) {
+						ReviewerDTO rev = new ReviewerDTO();
+						rev.setName(r.getName());
+						rev.setSurname(r.getSurname());
+						rev.setScientificarea(sa.getName());
+						rev.setId(r.getId());
+						retList.add(rev);
+					}
+				}	
+			}
+		
+		
+		
+		System.out.println("SIZEEEEEEEEEE: " + retList.size());
+		
+		
+		
+		return new ResponseEntity<>(retList, HttpStatus.OK);
+	}
+	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@PostMapping("/addreviewers/{taskid}")
+	public void addReviewers(@PathVariable String taskid,@RequestBody ArrayList<String> reviewerid) {
+		
+		ArrayList<Reviewer> listReviewer = new ArrayList<>();
+		for(String s : reviewerid) {
+			Reviewer r = reviewerRepository.findByIdEquals(Long.valueOf(s).longValue());
+			listReviewer.add(r);
+			
+		}
+		
+		List<String> odabraniRecezenti = new ArrayList();
+		for(Reviewer r : listReviewer) {
+			odabraniRecezenti.add(r.getUsername());
+		}
+		
+		HashMap<String, Object> mapp = new HashMap<>();
+		
+		mapp.put("listaRecenzenata", odabraniRecezenti);
+		taskService.complete(taskid, mapp);;
+		
+		
+		
+		
+	}
 	
 	
 	

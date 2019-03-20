@@ -41,7 +41,12 @@ public class Magazine {
 	private EditorReviewer maineditor; //glavni urednik
 	
 	@OneToMany
-	private Set<EditorReviewer> othereditors = new HashSet<>(); //urednici pojedinih naucnih oblasti
+	private Set<EditorReviewer> othereditors = new HashSet<>(); //urednici pojedinih naucnih oblasti kao i recezenti
+	
+	
+	@OneToMany
+	private Set<EditorSA> editorsa = new HashSet<>(); //urednik naucne oblasti
+	
 	
 	@OneToOne
 	private DBFile dbfile;
@@ -101,6 +106,20 @@ public class Magazine {
 
 
 
+
+
+	public ArrayList<EditorSA> getEditorsa() {
+		List<EditorSA> ret = new ArrayList<>(editorsa);
+		if(ret.size() > 0) {
+			return (ArrayList<EditorSA>) ret;
+		}
+		return null;
+	}
+
+
+	public void setEditorsa(Set<EditorSA> editorsa) {
+		this.editorsa = editorsa;
+	}
 
 
 	public EditorReviewer getMaineditor() {

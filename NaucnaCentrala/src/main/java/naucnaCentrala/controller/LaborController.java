@@ -182,5 +182,34 @@ public class LaborController {
 		
 		return "nesupesno";	
 	}
+
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@PostMapping(value="/uploadpdf/{taskid}")
+	public String uploadPDF(@RequestParam("file") MultipartFile file, @PathVariable String taskid) throws MailException, InterruptedException {
+		
+		DBFile dbfile = dbFileService.storeFile(file);
+
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult(); 
+		String processInstanceId = task.getProcessInstanceId(); 
+		
+		String laborname = runtimeService.getVariable(processInstanceId, "titlelabor").toString();
+		
+		Labor labor = laborRepository.findByTitleEquals(laborname);
+		if(labor==null) {
+			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa " + laborname);
+		}
+		labor.setDbfile(dbfile);
+		
+		laborRepository.save(labor);
+		
+		
+		HashMap<String, Object> mapp = new HashMap<>();
+		mapp.put("pdf", "http://localhost:8038/dbfile/downloadFile=" + labor.getDbfile().getId());
+		
+		taskService.complete(taskid,mapp); 
+		
+		return null;
+	}
 	
 }

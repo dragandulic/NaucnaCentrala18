@@ -4,6 +4,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class SlanjeMejlaZaNoviRad implements JavaDelegate {
 	private MagazineRepository magazineRepository;
 	
 	@Override
-	public void execute(DelegateExecution execution) throws Exception {
+	public void execute(DelegateExecution execution) throws Exception, MailException, InterruptedException {
 		// TODO Auto-generated method stub
 		String username = (String) execution.getVariable("authoremail");
 		
