@@ -11,19 +11,19 @@ INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,
 INSERT INTO `naucnacentrala`.`magazine` (`id`, `name`,`issnnumber`, `dbfile_id`,`methodpayment`,`maineditor_id`,`merchant_id`,`merchant_password`,`amountmag`,`bitcointoken`,`client_id`,`client_secret`) VALUES ('3','Gradjevinarstvo','3312-0901','12',1,'3','411vkol342cdax9m18do5a38dvyw9e','3','2','dCJnxHQ1f6Q3HQXfJWqoKRgFuDyfMMLeWFw-FNGN','ATHOXo2z6yhdpIRweuNRpT0DCFtYHTorJydNeTtDyU2U5Z8kChwKSkB1ON_YlDX63Upen-uO_JmdQrDB','EAwpOW2YkI0BTx9I_bZr7u0_CidIz9VkFX-oRSkT80MKgazpSLIxjvPIbroaSL6r2o93C4a65cLnX5uv');
 
 
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('1','abstract', 'finalversion', 'kyeterms', '1', 'Analiza magnetopobudnih sila u multifaznim mašinama u sklopu integrisanih punjača za električna vozila', '1','1','1');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('2','abstract', 'finalversion', 'kyeterms', '2', 'Međulaboratorijska ispitivanja kod širokopojasnih merenja elektromagnetskih polja', '1','1','2');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('3','abstract', 'finalversion', 'kyeterms', '3', 'Sistemi emitovanja i standardi satelitske televizijske transmisije u Evropi', '1','1','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('1','abstract', 'finalversion', 'kyeterms', '1', 'Analiza magnetopobudnih sila u multifaznim mašinama u sklopu integrisanih punjača za električna vozila', '1','1','1','verified');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('2','abstract', 'finalversion', 'kyeterms', '2', 'Međulaboratorijska ispitivanja kod širokopojasnih merenja elektromagnetskih polja', '1','1','2','verified');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('3','abstract', 'finalversion', 'kyeterms', '3', 'Sistemi emitovanja i standardi satelitske televizijske transmisije u Evropi', '1','1','2','verified');
 
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('4','abstract', 'finalversion', 'kyeterms', '4', 'Uticaj niskotarifnog prevozioca na cene karata tradicionalnog prevozioca na interkontinentalnim letovima', '3','1','2');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('5','abstract', 'finalversion', 'kyeterms', '5', 'Izmena putnika na međumesnim linijama', '3','1','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('4','abstract', 'finalversion', 'kyeterms', '4', 'Uticaj niskotarifnog prevozioca na cene karata tradicionalnog prevozioca na interkontinentalnim letovima', '3','1','2','verified');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('5','abstract', 'finalversion', 'kyeterms', '5', 'Izmena putnika na međumesnim linijama', '3','1','2','verified');
 
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('6','abstract', 'finalversion', 'kyeterms', '6', 'Savremena uloga i značaj profesionalnih kvalifikacija u sektoru bankarstva', '2','2','1');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('7','abstract', 'finalversion', 'kyeterms', '7', 'Tradicionalni i novi poslovni modeli u bankarskoj industriji', '2','2','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('6','abstract', 'finalversion', 'kyeterms', '6', 'Savremena uloga i značaj profesionalnih kvalifikacija u sektoru bankarstva', '2','2','1','verified');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('7','abstract', 'finalversion', 'kyeterms', '7', 'Tradicionalni i novi poslovni modeli u bankarskoj industriji', '2','2','2','verified');
 
 
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('8','abstract', 'finalversion', 'kyeterms', '10', 'Nelinearna seizmička analiza stubova kontinualnog AB mosta', '2','3','1');
-INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`) VALUES ('9','abstract', 'finalversion', 'kyeterms', '11', 'Odvajanje grede konačne dužine od Vinklerove nezatežuće podloge pri dejstvu sile na kraju grede', '2','3','2');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('8','abstract', 'finalversion', 'kyeterms', '10', 'Nelinearna seizmička analiza stubova kontinualnog AB mosta', '2','3','1','verified');
+INSERT INTO `naucnacentrala`.`labor` (`id`, `abstrct`, `finalversion`, `keyterms`, `dbfile_id`, `title`, `scientificarea_id`,`magazine_id`,`pricelabor`,`state`) VALUES ('9','abstract', 'finalversion', 'kyeterms', '11', 'Odvajanje grede konačne dužine od Vinklerove nezatežuće podloge pri dejstvu sile na kraju grede', '2','3','2','verified');
 
 
 INSERT INTO `naucnacentrala`.`scientific_area` (`id`, `name`,`code`) VALUES ('1','Elektrotehnika','ELE');
@@ -133,9 +133,13 @@ INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientif
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('5','2');
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('6','2');
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('7','2');
+INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('9','3');
+INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('8','3');
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('1','4');
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('5','4');
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('8','4');
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('9','4');
+INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('6','5');
+INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('7','5');
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('10','6');
 INSERT INTO `naucnacentrala`.`reviewer_scientifica_area`(`reviewer_id`,`scientifica_area_id`) VALUES ('11','6');

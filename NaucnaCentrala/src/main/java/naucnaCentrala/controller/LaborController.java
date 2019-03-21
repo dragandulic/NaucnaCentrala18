@@ -203,6 +203,7 @@ public class LaborController {
 		
 		laborRepository.save(labor);
 		
+
 		
 		HashMap<String, Object> mapp = new HashMap<>();
 		mapp.put("pdf", "http://localhost:8038/dbfile/downloadFile=" + labor.getDbfile().getId());

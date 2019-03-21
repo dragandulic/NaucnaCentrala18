@@ -134,9 +134,13 @@ public class LaborService {
 						}
 					}
 				}
+				if(l.getState() != null) {
+					if(l.getState().equals("verified")) {
+						retlist.add(labordto);
+					}
+				}
+
 				
-				
-				retlist.add(labordto);
 			}
 			
 			

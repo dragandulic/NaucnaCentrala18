@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import naucnaCentrala.dto.CheckChangeDTO;
 import naucnaCentrala.dto.FieldsCamundaDTO;
 import naucnaCentrala.dto.FormFieldsDTO;
+import naucnaCentrala.dto.MarkDTO;
+import naucnaCentrala.dto.OverviewLaborDTO;
 import naucnaCentrala.dto.ResponseDTO;
 import naucnaCentrala.dto.ReviewLaborDTO;
 import naucnaCentrala.dto.ReviewerDTO;
@@ -125,6 +128,14 @@ public class TasksController {
 				return "labornotformatted";
 			case "Izbor recezenata":
 				return "choosereviewer";
+			case "Pregled rada unos komentara autoru i uredniku i procene":
+				return "reviewertask";
+			case "Pregled ocena":
+				return "overviewdecisions";
+			case "Ispravljanje gresaka rada i upload novog pdf-a":
+				return "fixanduploadlabor";
+			case "Provera zahtevanih izmena":
+				return "checkchanges";
 		}
 		return "ostani";
 	}
@@ -376,11 +387,169 @@ public class TasksController {
 		mapp.put("listaRecenzenata", odabraniRecezenti);
 		taskService.complete(taskid, mapp);;
 		
+	
+	}
+	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@PostMapping("/overviewlabor/{taskid}")
+	public void overviewLabor(@PathVariable String taskid, @RequestBody OverviewLaborDTO o) {
 		
 		
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		
+		
+		String useremail = "";
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			useremail = ((UserDetails)principal).getUsername();
+		} else {
+			useremail = principal.toString();
+		}
+		
+		
+		
+		HashMap<String, Object> mapp = new HashMap<>();
+		mapp.put("recezent_komentaruredniku_" + useremail, o.getCommentEditor());
+		mapp.put("recezent_komentarautoru_" + useremail, o.getCommentAuthor());
+		mapp.put("recezent_preporuka_" + useremail, o.getRating());
+		
+		taskService.complete(taskid, mapp);
+		
+	}
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/getdecisionsofreviewer/{taskid}")
+	public ResponseEntity<ArrayList<MarkDTO>> getDecisionsOfReviewer(@PathVariable String taskid) {
+		
+
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		List<String> reviewerusername = (List<String>) runtimeService.getVariable(procesInstanceId, "listaRecenzenata");
+		
+		ArrayList<MarkDTO> rev = new ArrayList<>();
+		
+		for(String s : reviewerusername) {
+			
+			String commentForEditor= (String) runtimeService.getVariable(procesInstanceId, "recezent_komentaruredniku_" + s);
+			String reting= (String) runtimeService.getVariable(procesInstanceId, "recezent_preporuka_" + s);
+			MarkDTO m = new MarkDTO();
+			m.setComment(commentForEditor);
+			m.setMark(reting);
+			rev.add(m);
+		}
+		
+		
+		
+		return new ResponseEntity<>(rev, HttpStatus.OK);
+		
+	}
+
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/completeoverviewdecision/{procena}/{taskid}")
+	public void completeOverviewLabor(@PathVariable String taskid, @PathVariable String procena) {
+		
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		HashMap<String, Object> mapp = new HashMap<>();
+		mapp.put("ocena", procena);
+		
+		taskService.complete(taskid, mapp);
 		
 	}
 	
 	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/getcommentforauthor/{taskid}")
+	public ResponseEntity<ArrayList<MarkDTO>> getCommentForAuthor(@PathVariable String taskid) {
+		
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		List<String> reviewerusername = (List<String>) runtimeService.getVariable(procesInstanceId, "listaRecenzenata");
+		
+		ArrayList<MarkDTO> rev = new ArrayList<>();
+		
+		for(String s : reviewerusername) {
+			
+			String commentForEditor= (String) runtimeService.getVariable(procesInstanceId, "recezent_komentarautoru_" + s);
+			
+			MarkDTO m = new MarkDTO();
+			m.setComment(commentForEditor);
+			m.setMark("");
+			
+			rev.add(m);
+		}
+		
+		return new ResponseEntity<>(rev, HttpStatus.OK);
+		
+	}
+	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/authoranswer/{taskid}/{answer}")
+	public void authoranswer(@PathVariable String taskid, @PathVariable String answer) {
+		
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		
+		runtimeService.setVariable(procesInstanceId, "authoranswer", answer);
+		
+	}
+	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/checkchanges/{taskid}")
+	public ResponseEntity<CheckChangeDTO> checkChanges(@PathVariable String taskid) {
+		
+		Task task = taskService.createTaskQuery().taskId(taskid).singleResult();
+		String procesInstanceId = task.getProcessInstanceId();
+		
+		List<String> reviewerusername = (List<String>) runtimeService.getVariable(procesInstanceId, "listaRecenzenata");
+		CheckChangeDTO m = new CheckChangeDTO();
+		ArrayList<String> li = new ArrayList<>();
+		for(String s : reviewerusername) {
+			
+			String commentForAuthor= (String) runtimeService.getVariable(procesInstanceId, "recezent_komentarautoru_" + s);
+			
+			li.add(commentForAuthor);
+			
+		}
+		m.setReviewercomment(li);
+		String authoranswer = (String) runtimeService.getVariable(procesInstanceId, "authoranswer");
+		m.setAuthoranswer(authoranswer);
+		String title = (String) runtimeService.getVariable(procesInstanceId, "titlelabor");
+		String keyterms = (String) runtimeService.getVariable(procesInstanceId, "keyterms");
+		String apstract = (String) runtimeService.getVariable(procesInstanceId, "abstract");
+		m.setApstract(apstract);
+		m.setKeyterms(keyterms);
+		m.setTitle(title);
+		return new ResponseEntity<>(m, HttpStatus.OK);
+		
+	}
+	
+	
+	@PreAuthorize("hasRole('USER') or hasRole('AUTHOR') or hasRole('EDITOR')")
+	@GetMapping("/completecheckchanges/{taskid}/{procena}")
+	public void completeCheckChanges(@PathVariable String taskid,@PathVariable String procena) {
+		
+		HashMap<String, Object> mapp = new HashMap<>();
+		
+		if(procena.equals("PRIHVATI")) {
+			mapp.put("zadovoljan", true);
+		}
+		else if(procena.equals("POPRAVI LABOR")) {
+			mapp.put("zadovoljan", false);
+		}
+		
+		taskService.complete(taskid,mapp);
+		
+	}
 	
 }

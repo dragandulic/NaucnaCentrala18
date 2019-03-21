@@ -4,7 +4,6 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -17,9 +16,8 @@ import naucnaCentrala.repository.MagazineRepository;
 import naucnaCentrala.repository.UserRepository;
 
 @Service
-public class SlanjeMejlaOdbijanja implements JavaDelegate {
+public class SlanjeMejlaRadPrihvacen implements JavaDelegate {
 
-	
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
@@ -33,10 +31,11 @@ public class SlanjeMejlaOdbijanja implements JavaDelegate {
 	@Autowired
 	private MagazineRepository magazineRepository;
 	
-
+	@Autowired
+	private LaborRepository laborRepository;
 	
 	@Override
-	public void execute(DelegateExecution execution) throws Exception, MailException, InterruptedException {
+	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 
 		
@@ -49,15 +48,22 @@ public class SlanjeMejlaOdbijanja implements JavaDelegate {
 		
 		Magazine m = magazineRepository.findByIdEquals(Long.valueOf(execution.getVariable("magazinid").toString()).longValue());
 		
-		email.setSubject("Odbijanje rada");
-		String text = "Obavestavamo Vas da je rad '" + execution.getVariable("titlelabor").toString() + "' u casopisu '" + m.getName()  + "' odbijen jer nije tematski prikladan.";
+		email.setSubject("Rad prihvacen");
+		String text = "Obavestavamo Vas da je rad '" + execution.getVariable("titlelabor").toString() + "' u casopisu '" + m.getName()  + "' PRIHVACEN.";
 				
 		email.setText(text);
-		System.out.println("Slanje mejla odbojnice...");
+		System.out.println("Slanje mejla da je rad prihvacen...");
 		javaMailSender.send(email);
-		System.out.println("Mail odbojnice poslat!");
+		System.out.println("Mail prihvatanja poslat!");
 		
 		
+		String titlelabor = (String) execution.getVariable("titlelabor");
+		
+		Labor l = laborRepository.findByTitleEquals(titlelabor);
+		l.setState("verified");
+		laborRepository.save(l);
+		u.getPurchasedlabors().add(l);
+		userRepository.save(u);
 		
 	}
 
